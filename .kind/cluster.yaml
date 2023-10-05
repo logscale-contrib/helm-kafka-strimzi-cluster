@@ -1,0 +1,34 @@
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+nodes:
+  - role: control-plane
+  - role: worker
+    labels:
+      computerClass: compute
+      storageClass: networked
+      topology.kubernetes.io/zone: a
+  - role: worker
+    labels:
+      computerClass: compute
+      storageClass: networked
+      topology.kubernetes.io/zone: a
+  - role: worker
+    labels:
+      computerClass: compute
+      storageClass: networked
+      topology.kubernetes.io/zone: b
+  - role: worker
+    labels:
+      computerClass: compute
+      storageClass: networked
+      topology.kubernetes.io/zone: b
+  - role: worker
+    labels:
+      computerClass: compute
+      storageClass: networked
+      topology.kubernetes.io/zone: c
+  - role: worker
+    labels:
+      computerClass: compute
+      storageClass: networked
+      topology.kubernetes.io/zone: c
