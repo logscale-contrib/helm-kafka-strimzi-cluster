@@ -129,7 +129,7 @@ zookeeper:
     #   memory: 128Mi
   storage:
     type: persistent-claim
-    size: 50Gi
+    size: 5Gi
     deleteClaim: true
     #Must be SSD or NVME like storage IOPs is the primary node constraint
     # class:

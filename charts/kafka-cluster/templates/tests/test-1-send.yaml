@@ -1,0 +1,75 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: {{ include "kafka-cluster.fullname" . }}-send
+  labels:
+    {{- include "kafka-cluster.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook-weight": "1"
+    "helm.sh/hook": test
+    checkov.io/skip1: CKV_K8S_8=Test container this is ok
+    checkov.io/skip2: CKV_K8S_9=Test container this is ok
+    checkov.io/skip3: CKV_K8S_15=Test container this is ok
+    checkov.io/skip4: CKV_K8S_35=Test container this is ok
+
+spec:
+  automountServiceAccountToken: false
+  securityContext:
+    runAsNonRoot: true
+    seccompProfile:
+      type: RuntimeDefault
+  initContainers:
+    - name: wait
+      #checkov:skip=CKV_K8S_43: Not for Public Charts
+      image: ghcr.io/wait-for-service/containers/container-wait-for-service:kafka_1.2.0
+      args:
+      - --timeout
+      - "600"
+      - kafka://{{ include "kafka-cluster.fullname" . }}-kafka-bootstrap:9092
+
+      securityContext:
+        runAsUser: 10001
+        runAsGroup: 10001
+        capabilities:
+          drop:
+            - ALL
+        runAsNonRoot: true
+        readOnlyRootFilesystem: true
+        allowPrivilegeEscalation: false
+        seccompProfile:
+          type: RuntimeDefault
+  containers:
+    - name: test
+      #checkov:skip=CKV_K8S_43: Not for Public Charts
+      image: quay.io/strimzi/kafka:0.37.0-kafka-3.5.1
+      command: ['bash']
+      args:
+      - -c
+      - ./bin/kafka-console-producer.sh --bootstrap-server {{ include "kafka-cluster.fullname" . }}-kafka-bootstrap:9092 --topic test-events < NOTICE
+      resources:
+        # We usually recommend not to specify default resources and to leave this as a conscious
+        # choice for the user. This also increases chances charts run on environments with little
+        # resources, such as Minikube. If you do want to specify resources, uncomment the following
+        # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+        limits:
+          cpu: 100m
+          memory: 128Mi
+        requests:
+          cpu: 100m
+          memory: 128Mi
+
+      env:
+
+      securityContext:
+        runAsUser: 10001
+        runAsGroup: 10001
+        capabilities:
+          drop:
+            - ALL
+        runAsNonRoot: true
+        readOnlyRootFilesystem: true
+        allowPrivilegeEscalation: false
+        seccompProfile:
+          type: RuntimeDefault
+  restartPolicy: Never
