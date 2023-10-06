@@ -10,6 +10,4 @@ metadata:
     "helm.sh/hook": test
 spec:
   topicName: test-events
-  partitions: 1
-  replicas: 1
 ---
