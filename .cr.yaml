@@ -1,0 +1,6 @@
+owner: logscale-contrib
+git-repo: helm-kafka-strimzi-cluster
+package-path: .
+release-name-template: v{{ .Version }}
+skip-existing: true
+make-release-latest: false
