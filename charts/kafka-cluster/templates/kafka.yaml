@@ -60,6 +60,9 @@ spec:
         affinity:
           {{- toYaml . | nindent 10 }}
         {{- end }}
+        {{- if .Values.kafka.priorityClassName }}
+        priorityClassName: {{ .Values.kafka.priorityClassName }}
+        {{- end }}
         {{- with .Values.kafka.tolerations }}
         tolerations:
           {{- toYaml . | nindent 10 }}
@@ -113,6 +116,9 @@ spec:
         {{- with .Values.zookeeper.affinity }}
         affinity:
           {{- toYaml . | nindent 10 }}
+        {{- end }}
+        {{- if .Values.zookeeper.priorityClassName }}
+        priorityClassName: {{ .Values.zookeeper.priorityClassName }}
         {{- end }}
         {{- with .Values.zookeeper.tolerations }}
         tolerations:
