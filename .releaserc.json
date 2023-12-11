@@ -69,7 +69,7 @@
       {
         "assets": [
           "README.md",
-          "chart/Chart.yaml"
+          "chart/kafka-strimzi-cluster/Chart.yaml"
         ],
         "message": "chore(release): ${nextRelease.version}\n\n${nextRelease.notes}"
       }
