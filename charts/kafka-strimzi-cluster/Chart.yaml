@@ -1,5 +1,5 @@
 apiVersion: v2
-name: kafka-cluster
+name: kafka-strimzi-cluster
 description: |
   A Chart for deployment and testing of a opinionated kafka cluster using strimzi
 

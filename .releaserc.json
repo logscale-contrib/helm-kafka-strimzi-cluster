@@ -53,10 +53,9 @@
     [
       "semantic-release-helm3",
       {
-        "chartPath": "charts/kafka-cluster",
+        "chartPath": "charts/kafka-strimzi-cluster",
         "registry": "ghcr.io/logscale-contrib/charts",
-        "populateChangelog": false,
-        "onlyUpdateVersion": true
+        "populateChangelog": false
       }
     ],
     [
@@ -70,7 +69,7 @@
       {
         "assets": [
           "README.md",
-          "chart/Chart.yaml"
+          "chart/kafka-strimzi-cluster/Chart.yaml"
         ],
         "message": "chore(release): ${nextRelease.version}\n\n${nextRelease.notes}"
       }

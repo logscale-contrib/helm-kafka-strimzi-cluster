@@ -1,0 +1,13 @@
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: {{ include "kafka-strimzi-cluster.fullname" . }}-test
+  labels:
+    strimzi.io/cluster: {{ include "kafka-strimzi-cluster.fullname" . }}
+    {{- include "kafka-strimzi-cluster.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook-weight": "0"
+    "helm.sh/hook": test
+spec:
+  topicName: test-events
+---
