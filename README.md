@@ -1,6 +1,6 @@
 # kafka-strimzi-cluster
 
-![Version: 2.0.0-next.2](https://img.shields.io/badge/Version-2.0.0--next.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.0.0-next.2](https://img.shields.io/badge/AppVersion-2.0.0--next.2-informational?style=flat-square)
+![Version: 2.0.0-next.3](https://img.shields.io/badge/Version-2.0.0--next.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.0.0-next.3](https://img.shields.io/badge/AppVersion-2.0.0--next.3-informational?style=flat-square)
 
 A Chart for deployment and testing of a opinionated kafka cluster using strimzi
 
