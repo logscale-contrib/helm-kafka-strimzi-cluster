@@ -1,9 +1,9 @@
 apiVersion: kafka.strimzi.io/v1beta2
 kind: Kafka
 metadata:
-  name: {{ include "strimzi-kafka-cluster.fullname" . }}
+  name: {{ include "kafka-strimzi-cluster.fullname" . }}
   labels:
-    {{- include "strimzi-kafka-cluster.labels" . | nindent 4 }}
+    {{- include "kafka-strimzi-cluster.labels" . | nindent 4 }}
 spec:
   cruiseControl:
     template:

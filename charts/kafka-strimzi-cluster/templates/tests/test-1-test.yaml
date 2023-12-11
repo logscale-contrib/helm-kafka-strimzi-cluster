@@ -2,9 +2,9 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: {{ include "strimzi-kafka-cluster.fullname" . }}-test
+  name: {{ include "kafka-strimzi-cluster.fullname" . }}-test
   labels:
-    {{- include "strimzi-kafka-cluster.labels" . | nindent 4 }}
+    {{- include "kafka-strimzi-cluster.labels" . | nindent 4 }}
   annotations:
     "helm.sh/hook-weight": "1"
     "helm.sh/hook": test
@@ -14,7 +14,7 @@ metadata:
     checkov.io/skip4: CKV_K8S_35=Test container this is ok
 
 spec:
-  serviceAccountName: {{ include "strimzi-kafka-cluster.fullname" . }}-status-reader
+  serviceAccountName: {{ include "kafka-strimzi-cluster.fullname" . }}-status-reader
   automountServiceAccountToken: true
   securityContext:
     runAsNonRoot: true
@@ -27,7 +27,7 @@ spec:
       command:
          - "bin/bash"
          - "-c"
-         - "kubectl wait --timeout=300s --for=condition=ready kafka {{ include "strimzi-kafka-cluster.fullname" . }}"
+         - "kubectl wait --timeout=300s --for=condition=ready kafka {{ include "kafka-strimzi-cluster.fullname" . }}"
       securityContext:
         runAsUser: 10001
         runAsGroup: 10001
@@ -45,7 +45,7 @@ spec:
       command:
          - "bin/bash"
          - "-c"
-         - "kubectl wait --timeout=900s --for=condition=ready kafkatopic {{ include "strimzi-kafka-cluster.fullname" . }}-test"
+         - "kubectl wait --timeout=900s --for=condition=ready kafkatopic {{ include "kafka-strimzi-cluster.fullname" . }}-test"
       securityContext:
         runAsUser: 10001
         runAsGroup: 10001
@@ -63,7 +63,7 @@ spec:
       command: ['bash']
       args:
       - -c
-      - sleep 10;./bin/kafka-console-producer.sh --bootstrap-server {{ include "strimzi-kafka-cluster.fullname" . }}-kafka-bootstrap:9092 --topic test-events < NOTICE
+      - sleep 10;./bin/kafka-console-producer.sh --bootstrap-server {{ include "kafka-strimzi-cluster.fullname" . }}-kafka-bootstrap:9092 --topic test-events < NOTICE
       resources:
         # We usually recommend not to specify default resources and to leave this as a conscious
         # choice for the user. This also increases chances charts run on environments with little
@@ -94,7 +94,7 @@ spec:
       command: ['bash']
       args:
       - -c
-      - ./bin/kafka-console-consumer.sh --bootstrap-server {{ include "strimzi-kafka-cluster.fullname" . }}-kafka-bootstrap:9092 --topic test-events --from-beginning --timeout-ms 30000 --max-messages 1
+      - ./bin/kafka-console-consumer.sh --bootstrap-server {{ include "kafka-strimzi-cluster.fullname" . }}-kafka-bootstrap:9092 --topic test-events --from-beginning --timeout-ms 30000 --max-messages 1
       resources:
         # We usually recommend not to specify default resources and to leave this as a conscious
         # choice for the user. This also increases chances charts run on environments with little

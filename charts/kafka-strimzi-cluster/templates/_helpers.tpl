@@ -1,7 +1,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "strimzi-kafka-cluster.name" -}}
+{{- define "kafka-strimzi-cluster.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
@@ -10,7 +10,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "strimzi-kafka-cluster.fullname" -}}
+{{- define "kafka-strimzi-cluster.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -26,16 +26,16 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "strimzi-kafka-cluster.chart" -}}
+{{- define "kafka-strimzi-cluster.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Common labels
 */}}
-{{- define "strimzi-kafka-cluster.labels" -}}
-helm.sh/chart: {{ include "strimzi-kafka-cluster.chart" . }}
-{{ include "strimzi-kafka-cluster.selectorLabels" . }}
+{{- define "kafka-strimzi-cluster.labels" -}}
+helm.sh/chart: {{ include "kafka-strimzi-cluster.chart" . }}
+{{ include "kafka-strimzi-cluster.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -45,17 +45,17 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "strimzi-kafka-cluster.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "strimzi-kafka-cluster.name" . }}
+{{- define "kafka-strimzi-cluster.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "kafka-strimzi-cluster.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "strimzi-kafka-cluster.serviceAccountName" -}}
+{{- define "kafka-strimzi-cluster.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
-{{- default (include "strimzi-kafka-cluster.fullname" .) .Values.serviceAccount.name }}
+{{- default (include "kafka-strimzi-cluster.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
