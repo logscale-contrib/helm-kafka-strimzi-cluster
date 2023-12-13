@@ -153,6 +153,6 @@ zookeeper:
   affinity: {}
 
   securityContext:
-      {}
-      # fsGroup: 1000
-      # runAsUser: 1000
+    {}
+    # fsGroup: 1000
+    # runAsUser: 1000
