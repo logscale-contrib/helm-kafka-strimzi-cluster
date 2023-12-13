@@ -1,6 +1,6 @@
 # kafka-strimzi-cluster
 
-![Version: 2.0.0](https://img.shields.io/badge/Version-2.0.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.0.0](https://img.shields.io/badge/AppVersion-2.0.0-informational?style=flat-square)
+![Version: 2.1.0](https://img.shields.io/badge/Version-2.1.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.1.0](https://img.shields.io/badge/AppVersion-2.1.0-informational?style=flat-square)
 
 A Chart for deployment and testing of a opinionated kafka cluster using strimzi
 
@@ -30,6 +30,7 @@ A Chart for deployment and testing of a opinionated kafka cluster using strimzi
 | kafka.nodeSelector | object | `{}` |  |
 | kafka.replicas | int | `3` |  |
 | kafka.resources | object | `{}` |  |
+| kafka.securityContext | object | `{}` |  |
 | kafka.storage | string | `nil` |  |
 | kafka.tolerations | list | `[]` |  |
 | topicOperator.affinity | object | `{}` |  |
@@ -56,6 +57,7 @@ A Chart for deployment and testing of a opinionated kafka cluster using strimzi
 | zookeeper.nodeSelector | object | `{}` |  |
 | zookeeper.replicas | int | `3` |  |
 | zookeeper.resources | object | `{}` |  |
+| zookeeper.securityContext | object | `{}` |  |
 | zookeeper.storage | string | `nil` |  |
 | zookeeper.tolerations | list | `[]` |  |
 
