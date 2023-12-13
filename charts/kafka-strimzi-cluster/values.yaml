@@ -100,6 +100,11 @@ kafka:
     # Must be SSD or NVME like storage IOPs is the primary node constraint
     # class:
 
+  securityContext:
+    {}
+    # fsGroup: 1000
+    # runAsUser: 1000
+
   autoscaling:
     enabled: false
     minReplicas: 1
@@ -146,3 +151,8 @@ zookeeper:
   tolerations: []
 
   affinity: {}
+
+  securityContext:
+      {}
+      # fsGroup: 1000
+      # runAsUser: 1000

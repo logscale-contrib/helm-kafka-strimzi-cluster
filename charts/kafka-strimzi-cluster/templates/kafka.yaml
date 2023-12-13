@@ -71,6 +71,12 @@ spec:
         topologySpreadConstraints:
           {{- toYaml . | nindent 10 }}
         {{- end }}
+        {{- with .Values.kafka.securityContext }}
+        securityContext:
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
+    # fsGroup: 1000
+    # runAsUser: 1000
     resources:
       {{- toYaml .Values.kafka.resources | nindent 6 }}
     # authorization:
@@ -126,6 +132,10 @@ spec:
         {{- end }}
         {{- with .Values.zookeeper.topologySpreadConstraints }}
         topologySpreadConstraints:
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
+        {{- with .Values.zookeeper.securityContext }}
+        securityContext:
           {{- toYaml . | nindent 10 }}
         {{- end }}
     resources:
