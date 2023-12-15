@@ -76,7 +76,7 @@ jobs:
           framework: github_configuration
 
       - name: Upload SARIF file
-        uses: github/codeql-action/upload-sarif@v2
+        uses: github/codeql-action/upload-sarif@v3
 
         # Results are generated only on a success or failure
         # this is required since GitHub by default won't run the next step
@@ -113,7 +113,7 @@ jobs:
           var_file: "${{ matrix.values }}-values.yaml"
 
       - name: Upload SARIF file
-        uses: github/codeql-action/upload-sarif@v2
+        uses: github/codeql-action/upload-sarif@v3
 
         # Results are generated only on a success or failure
         # this is required since GitHub by default won't run the next step
