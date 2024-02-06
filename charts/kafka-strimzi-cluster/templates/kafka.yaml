@@ -106,10 +106,11 @@ spec:
         tls: true
         type: internal
         {{- if .Values.kafka.listeners.internal.tls.secretName }}
-        brokerCertChainAndKey:
-          secretName: {{ .Values.kafka.listeners.internal.tls.secretName }}
-          certificate: tls.crt
-          key: tls.key
+        configuration:
+          brokerCertChainAndKey:
+            secretName: {{ .Values.kafka.listeners.internal.tls.secretName }}
+            certificate: tls.crt
+            key: tls.key
         {{- end }}
         # authentication:
         #   type: tls
