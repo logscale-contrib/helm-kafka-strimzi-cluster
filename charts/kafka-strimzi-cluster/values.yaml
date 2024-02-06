@@ -81,6 +81,13 @@ userOperator:
 
 kafka:
   replicas: 3
+  listeners:
+    internal:
+      plain:
+        enabled: true
+      tls:
+        enabled: true
+        # secretName: kafka-tls
   resources:
     {}
     # We usually recommend not to specify default resources and to leave this as a conscious

@@ -94,16 +94,26 @@ spec:
     rack:
       topologyKey: topology.kubernetes.io/zone
     listeners:
+      {{- if .Values.kafka.listeners.internal.plain.enabled }}
       - name: plain
         port: 9092
         tls: false
         type: internal
+      {{- end }}
+      {{- if .Values.kafka.listeners.internal.tls.enabled }}
       - name: tls
         port: 9093
         tls: true
         type: internal
-        authentication:
-          type: tls
+        {{- if .Values.kafka.listeners.internal.tls.secretName }}
+        brokerCertChainAndKey:
+          secretName: {{ .Values.kafka.listeners.internal.tls.secretName }}
+          certificate: tls.crt
+          key: tls.key
+        {{- end }}
+        # authentication:
+        #   type: tls
+      {{- end }}
       # - name: external
       #   port: 9094
       #   tls: false
