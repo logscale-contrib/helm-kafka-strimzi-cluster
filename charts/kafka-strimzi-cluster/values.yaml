@@ -87,7 +87,7 @@ kafka:
         enabled: true
       tls:
         enabled: true
-        # secretName: kafka-tls
+        # secretName:
   resources:
     {}
     # We usually recommend not to specify default resources and to leave this as a conscious
