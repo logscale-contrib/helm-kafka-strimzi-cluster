@@ -1,6 +1,6 @@
 # kafka-strimzi-cluster
 
-![Version: 3.0.0-next.2](https://img.shields.io/badge/Version-3.0.0--next.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 3.0.0-next.2](https://img.shields.io/badge/AppVersion-3.0.0--next.2-informational?style=flat-square)
+![Version: 3.0.0-next.3](https://img.shields.io/badge/Version-3.0.0--next.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 3.0.0-next.3](https://img.shields.io/badge/AppVersion-3.0.0--next.3-informational?style=flat-square)
 
 A Chart for deployment and testing of a opinionated kafka cluster using strimzi
 
@@ -28,6 +28,9 @@ A Chart for deployment and testing of a opinionated kafka cluster using strimzi
 | kafka.autoscaling.minReplicas | int | `1` |  |
 | kafka.autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
 | kafka.listeners.internal.plain.enabled | bool | `true` |  |
+| kafka.listeners.internal.tls.certManager.enabled | bool | `false` |  |
+| kafka.listeners.internal.tls.certManager.issuerRef.kind | string | `"ClusterIssuer"` |  |
+| kafka.listeners.internal.tls.certManager.issuerRef.name | string | `nil` |  |
 | kafka.listeners.internal.tls.enabled | bool | `true` |  |
 | kafka.nodeSelector | object | `{}` |  |
 | kafka.replicas | int | `3` |  |
