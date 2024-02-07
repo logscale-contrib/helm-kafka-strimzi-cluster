@@ -95,7 +95,7 @@ kafka:
         # secretName:
         authentication:
           enabled: true
-          type: scram-sha-512
+          type: tls
   authorization:
     enabled: true
     type: simple
