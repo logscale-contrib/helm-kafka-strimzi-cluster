@@ -112,6 +112,13 @@ spec:
             certificate: tls.crt
             key: tls.key
         {{- end }}
+        {{- if .Values.kafka.listeners.internal.tls.certManager.enabled }}
+        configuration:
+          brokerCertChainAndKey:
+            secretName: {{ include "kafka-strimzi-cluster.fullname" . }}-listener-internal-tls
+            certificate: tls.crt
+            key: tls.key
+        {{- end }}
         # authentication:
         #   type: tls
       {{- end }}

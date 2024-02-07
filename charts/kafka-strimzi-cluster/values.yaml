@@ -87,6 +87,11 @@ kafka:
         enabled: true
       tls:
         enabled: true
+        certManager:
+          enabled: false
+          issuerRef:
+            name:
+            kind: ClusterIssuer
         # secretName:
   resources:
     {}
