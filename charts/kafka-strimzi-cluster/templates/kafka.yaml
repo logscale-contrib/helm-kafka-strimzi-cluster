@@ -79,10 +79,6 @@ spec:
     # runAsUser: 1000
     resources:
       {{- toYaml .Values.kafka.resources | nindent 6 }}
-    authorization:
-      type: simple
-      superUsers:
-        - CM={{ include "kafka-strimzi-cluster.fullname" . }}-kadmin
     config:
       min.insync.replicas: 2
       auto.create.topics.enable: {{ .Values.kafka.allowAutoCreate | default false }}
