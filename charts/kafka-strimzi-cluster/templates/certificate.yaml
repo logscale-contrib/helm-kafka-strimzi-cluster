@@ -16,6 +16,6 @@ spec:
     - "*.kafka-kafka-brokers.{{ .Release.Namespace }}.svc.cluster.local"
     - "*.kafka-kafka-brokers.{{ .Release.Namespace }}.svc"
   issuerRef:
-    name: {{ .Values.kafka.listeners.internal.tls.certManager.issuerRef.Name }}
+    name: {{ .Values.kafka.listeners.internal.tls.certManager.issuerRef.name }}
     kind: {{ .Values.kafka.listeners.internal.tls.certManager.issuerRef.kind }}
 {{- end }}
