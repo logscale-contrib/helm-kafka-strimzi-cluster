@@ -84,7 +84,7 @@ kafka:
   listeners:
     internal:
       plain:
-        enabled: true
+        enabled: false
       tls:
         enabled: true
         certManager:
@@ -93,6 +93,12 @@ kafka:
             name:
             kind: ClusterIssuer
         # secretName:
+        authentication:
+          enabled: true
+          type: scram-sha-512
+  authorization:
+    enabled: true
+    type: simple
   resources:
     {}
     # We usually recommend not to specify default resources and to leave this as a conscious

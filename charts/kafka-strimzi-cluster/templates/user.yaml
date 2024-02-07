@@ -1,0 +1,9 @@
+apiVersion: kafka.strimzi.io/v1beta1
+kind: KafkaUser
+metadata:
+  name: {{ include "kafka-strimzi-cluster.fullname" . }}-kadmin
+  labels:
+    strimzi.io/cluster: {{ include "kafka-strimzi-cluster.fullname" . }}
+spec:
+  authentication:
+    type: scram-sha-512
