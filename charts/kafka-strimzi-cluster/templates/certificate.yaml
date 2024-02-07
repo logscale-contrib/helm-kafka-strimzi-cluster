@@ -10,11 +10,11 @@ spec:
     - server auth
     - client auth
   dnsNames:
-    - "kafka-kafka-bootstrap.{{ .Release.Namespace }}.svc.cluster.local"
-    - "kafka-kafka-bootstrap.{{ .Release.Namespace }}.svc"
-    - "kafka-kafka-bootstrap"
-    - "*.kafka-kafka-brokers.{{ .Release.Namespace }}.svc.cluster.local"
-    - "*.kafka-kafka-brokers.{{ .Release.Namespace }}.svc"
+    - "{{ include "kafka-strimzi-cluster.fullname" . }}-kafka-bootstrap.{{ .Release.Namespace }}.svc.cluster.local"
+    - "{{ include "kafka-strimzi-cluster.fullname" . }}-kafka-bootstrap.{{ .Release.Namespace }}.svc"
+    - "{{ include "kafka-strimzi-cluster.fullname" . }}-kafka-bootstrap"
+    - "*.{{ include "kafka-strimzi-cluster.fullname" . }}-kafka-brokers.{{ .Release.Namespace }}.svc.cluster.local"
+    - "*.{{ include "kafka-strimzi-cluster.fullname" . }}-kafka-brokers.{{ .Release.Namespace }}.svc"
   issuerRef:
     name: {{ .Values.kafka.listeners.internal.tls.certManager.issuerRef.name }}
     kind: {{ .Values.kafka.listeners.internal.tls.certManager.issuerRef.kind }}
