@@ -6,4 +6,4 @@ metadata:
     strimzi.io/cluster: {{ include "kafka-strimzi-cluster.fullname" . }}
 spec:
   authentication:
-    type: tls-external
+    type: {{ .Values.kafka.listeners.internal.tls.authentication.type }}

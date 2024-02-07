@@ -5,6 +5,8 @@ metadata:
   labels:
     {{- include "kafka-strimzi-cluster.labels" . | nindent 4 }}
 spec:
+  clientCa:
+      generateCertificateAuthority: false
   cruiseControl:
     template:
       pod:
