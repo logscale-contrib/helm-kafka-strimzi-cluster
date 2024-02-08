@@ -138,26 +138,25 @@ jobs:
     outputs:
       version: ${{ steps.version.outputs.new_release_version }}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      #Yes we need code
+      - uses: actions/checkout@v3
         with:
+          submodules: false
           persist-credentials: false
-          fetch-depth: 0
-      - uses: actions/setup-node@v4
+
+      - name: Login to ghcr for helm
+        run: |
+          echo ${{ secrets.GITHUB_TOKEN }} | helm registry login --password-stdin -u ${{ github.repository_owner }} ghcr.io/${{ github.repository_owner }}
+
+      - uses: actions/setup-node@v3
         with:
-          node-version: 20
-      - name: Run chart-releaser
-        uses: helm/chart-releaser-action@v1.5.0
-        with:
-          install_only: true
+          node-version: "18"
+      - uses: azure/setup-helm@v3
+
       - name: Semantic Release
+        if: github.event_name != 'pull_request'
         id: version
-        uses: cycjimmy/semantic-release-action@v4
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # REGISTRY_HOST: ghcr.io
-          REGISTRY_USERNAME: ${{ github.actor }}
-          REGISTRY_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+        uses: cycjimmy/semantic-release-action@v3.4.2
         with:
           semantic_version: 19.0.5
           extra_plugins: |
@@ -168,4 +167,8 @@ jobs:
             @semantic-release/changelog@6.0.3
             conventional-changelog-conventionalcommits@6.1.0
             @semantic-release/exec@6.0.3
-            semantic-release-helm3@2.9.3
+            semantic-release-helm3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REGISTRY_USERNAME: ${{ github.repository_owner }}
+          REGISTRY_PASSWORD: ${{ secrets.GITHUB_TOKEN }}

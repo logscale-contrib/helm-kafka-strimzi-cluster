@@ -5,6 +5,8 @@ metadata:
   labels:
     {{- include "kafka-strimzi-cluster.labels" . | nindent 4 }}
 spec:
+  clientCa:
+      generateCertificateAuthority: false
   cruiseControl:
     template:
       pod:
@@ -79,10 +81,6 @@ spec:
     # runAsUser: 1000
     resources:
       {{- toYaml .Values.kafka.resources | nindent 6 }}
-    # authorization:
-    #   type: simple
-    #   superUsers:
-    #     - lsadmin
     config:
       min.insync.replicas: 2
       auto.create.topics.enable: {{ .Values.kafka.allowAutoCreate | default false }}
@@ -94,23 +92,42 @@ spec:
     rack:
       topologyKey: topology.kubernetes.io/zone
     listeners:
+      {{- if .Values.kafka.listeners.internal.plain.enabled }}
       - name: plain
         port: 9092
         tls: false
         type: internal
+      {{- end }}
+      {{- if .Values.kafka.listeners.internal.tls.enabled }}
       - name: tls
         port: 9093
         tls: true
         type: internal
+        {{- if .Values.kafka.listeners.internal.tls.secretName }}
+        configuration:
+          brokerCertChainAndKey:
+            secretName: {{ .Values.kafka.listeners.internal.tls.secretName }}
+            certificate: tls.crt
+            key: tls.key
+        {{- end }}
+        {{- if .Values.kafka.listeners.internal.tls.certManager.enabled }}
+        configuration:
+          brokerCertChainAndKey:
+            secretName: {{ include "kafka-strimzi-cluster.fullname" . }}-listener-internal-tls
+            certificate: tls.crt
+            key: tls.key
+        {{- end }}
+        {{- if .Values.kafka.listeners.internal.tls.authentication.enabled }}
         authentication:
-          type: tls
-      # - name: external
-      #   port: 9094
-      #   tls: false
-      #   type: cluster-ip
-      #   authentication:
-      #     type: scram-sha-512
-
+          type: {{ .Values.kafka.listeners.internal.tls.authentication.type }}
+        {{- end }}
+      {{- end }}
+    {{- if .Values.kafka.authorization.enabled }}
+    authorization:
+      type: simple
+      superUsers:
+        - {{ include "kafka-strimzi-cluster.fullname" . }}-kadmin
+    {{- end }}
 
     replicas: {{ .Values.kafka.replicas }}
     storage:

@@ -1,0 +1,21 @@
+{{- if .Values.kafka.listeners.internal.tls.certManager.enabled }}
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: {{ include "kafka-strimzi-cluster.fullname" . }}
+spec:
+  secretName: {{ include "kafka-strimzi-cluster.fullname" . }}-listener-internal-tls
+  isCA: false
+  usages:
+    - server auth
+    - client auth
+  dnsNames:
+    - "{{ include "kafka-strimzi-cluster.fullname" . }}-kafka-bootstrap.{{ .Release.Namespace }}.svc.cluster.local"
+    - "{{ include "kafka-strimzi-cluster.fullname" . }}-kafka-bootstrap.{{ .Release.Namespace }}.svc"
+    - "{{ include "kafka-strimzi-cluster.fullname" . }}-kafka-bootstrap"
+    - "*.{{ include "kafka-strimzi-cluster.fullname" . }}-kafka-brokers.{{ .Release.Namespace }}.svc.cluster.local"
+    - "*.{{ include "kafka-strimzi-cluster.fullname" . }}-kafka-brokers.{{ .Release.Namespace }}.svc"
+  issuerRef:
+    name: {{ .Values.kafka.listeners.internal.tls.certManager.issuerRef.name }}
+    kind: {{ .Values.kafka.listeners.internal.tls.certManager.issuerRef.kind }}
+{{- end }}

@@ -81,6 +81,24 @@ userOperator:
 
 kafka:
   replicas: 3
+  listeners:
+    internal:
+      plain:
+        enabled: false
+      tls:
+        enabled: true
+        certManager:
+          enabled: false
+          issuerRef:
+            name:
+            kind: ClusterIssuer
+        # secretName:
+        authentication:
+          enabled: true
+          type: tls
+  authorization:
+    enabled: true
+    type: simple
   resources:
     {}
     # We usually recommend not to specify default resources and to leave this as a conscious
