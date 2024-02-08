@@ -99,6 +99,8 @@ kafka:
   authorization:
     enabled: true
     type: simple
+  podDisruptionBudget:
+    maxUnavailable: 0
   resources:
     {}
     # We usually recommend not to specify default resources and to leave this as a conscious
@@ -138,6 +140,8 @@ kafka:
 
 zookeeper:
   replicas: 3
+  podDisruptionBudget:
+    maxUnavailable: 0
   resources:
     {}
     # We usually recommend not to specify default resources and to leave this as a conscious
