@@ -1,6 +1,6 @@
 # kafka-strimzi-cluster
 
-![Version: 3.0.0](https://img.shields.io/badge/Version-3.0.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 3.0.0](https://img.shields.io/badge/AppVersion-3.0.0-informational?style=flat-square)
+![Version: 3.1.0](https://img.shields.io/badge/Version-3.1.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 3.1.0](https://img.shields.io/badge/AppVersion-3.1.0-informational?style=flat-square)
 
 A Chart for deployment and testing of a opinionated kafka cluster using strimzi
 
@@ -37,6 +37,7 @@ A Chart for deployment and testing of a opinionated kafka cluster using strimzi
 | kafka.listeners.internal.tls.certManager.issuerRef.name | string | `nil` |  |
 | kafka.listeners.internal.tls.enabled | bool | `true` |  |
 | kafka.nodeSelector | object | `{}` |  |
+| kafka.podDisruptionBudget.maxUnavailable | int | `0` |  |
 | kafka.replicas | int | `3` |  |
 | kafka.resources | object | `{}` |  |
 | kafka.securityContext | object | `{}` |  |
@@ -64,6 +65,7 @@ A Chart for deployment and testing of a opinionated kafka cluster using strimzi
 | zookeeper.autoscaling.minReplicas | int | `1` |  |
 | zookeeper.autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
 | zookeeper.nodeSelector | object | `{}` |  |
+| zookeeper.podDisruptionBudget.maxUnavailable | int | `0` |  |
 | zookeeper.replicas | int | `3` |  |
 | zookeeper.resources | object | `{}` |  |
 | zookeeper.securityContext | object | `{}` |  |
