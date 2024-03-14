@@ -4,6 +4,12 @@ metadata:
   name: {{ include "kafka-strimzi-cluster.fullname" . }}
   labels:
     {{- include "kafka-strimzi-cluster.labels" . | nindent 4 }}
+  annotations:
+  {{- if .Values.nodePools.enabled}}
+    strimzi.io/node-pools: enabled
+  {{- else }}
+    strimzi.io/node-pools: disabled
+  {{- end }}
 spec:
   clientCa:
       generateCertificateAuthority: false
@@ -56,6 +62,7 @@ spec:
       resources:
         {{- toYaml .Values.userOperator.resources | nindent 8 }}
   kafka:
+  {{- if not .Values.nodePools.enabled }}
     template:
       pod:
         {{- with .Values.kafka.affinity }}
@@ -83,6 +90,10 @@ spec:
     # runAsUser: 1000
     resources:
       {{- toYaml .Values.kafka.resources | nindent 6 }}
+    replicas: {{ .Values.kafka.replicas }}
+    storage:
+      {{- toYaml .Values.kafka.storage | nindent 6 }}
+  {{- end }}
     config:
       min.insync.replicas: 2
       auto.create.topics.enable: {{ .Values.kafka.allowAutoCreate | default false }}
@@ -131,9 +142,7 @@ spec:
         - {{ include "kafka-strimzi-cluster.fullname" . }}-kadmin
     {{- end }}
 
-    replicas: {{ .Values.kafka.replicas }}
-    storage:
-      {{- toYaml .Values.kafka.storage | nindent 6 }}
+
 
   zookeeper:
     template:

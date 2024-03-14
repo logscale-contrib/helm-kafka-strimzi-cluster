@@ -2,11 +2,12 @@
 apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaNodePool
 metadata:
-  name: controller
+  name: {{ include "kafka-strimzi-cluster.fullname" . }}-controller
   labels:
     strimzi.io/cluster: {{ include "kafka-strimzi-cluster.fullname" . }}
+    {{- include "kafka-strimzi-cluster.labels" . | nindent 4 }}
 spec:
-  replicas: 3
+  replicas: {{ .Values.nodePools.controller.replicas | default 3 }}
   roles:
     - controller
   storage:

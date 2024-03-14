@@ -1,0 +1,41 @@
+{{- if .Values.nodePools.enabled }}
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaNodePool
+metadata:
+  name: {{ include "kafka-strimzi-cluster.fullname" . }}
+  labels:
+    strimzi.io/cluster: {{ include "kafka-strimzi-cluster.fullname" . }}
+    {{- include "kafka-strimzi-cluster.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.nodePools.kafka.replicas | default 3 }}
+  roles:
+    - broker
+  storage:
+    {{- toYaml .Values.nodePools.kafka.storage | nindent 4 }}
+  template:
+    pod:
+        {{- with .Values.nodePools.kafka.template.pod.affinity }}
+        affinity:
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
+        {{- if .Values.nodePools.kafka.template.pod.priorityClassName }}
+        priorityClassName: {{ .Values.nodePools.kafka.template.pod.priorityClassName }}
+        {{- end }}
+        {{- with .Values.nodePools.kafka.template.pod.tolerations }}
+        tolerations:
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
+        {{- with .Values.nodePools.kafka.template.pod.topologySpreadConstraints }}
+        topologySpreadConstraints:
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
+        {{- with .Values.nodePools.kafka.template.pod.securityContext }}
+        securityContext:
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
+      podDisruptionBudget:
+        maxUnavailable: {{ .Values.nodePools.kafka.template.pod.podDisruptionBudget.maxUnavailable | default 0 }}
+
+  resources:
+    {{- toYaml .Values.nodePools.kafka.resources | nindent 4 }}
+{{- end }}
