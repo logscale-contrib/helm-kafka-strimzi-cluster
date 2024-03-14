@@ -63,7 +63,34 @@ spec:
         {{- toYaml .Values.userOperator.resources | nindent 8 }}
   kafka:
   {{- if .Values.nodePools.enabled }}
-    replicas: 0
+    replicas: {{ .Values.nodePools.kafka.replicas | default 3 }}
+    resources:
+      {{- toYaml .Values.kafka.resources | nindent 6 }}
+    storage:
+      {{- toYaml .Values.kafka.storage | nindent 6 }}
+    template:
+      pod:
+        {{- with .Values.nodePools.kafkatemplate.pod.affinity }}
+        affinity:
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
+        {{- if .Values.nodePools.kafka.template.pod.priorityClassName }}
+        priorityClassName: {{ .Values.nodePools.kafka.template.pod.priorityClassName }}
+        {{- end }}
+        {{- with .Values.kafka.nodePools.template.pod.tolerations }}
+        tolerations:
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
+        {{- with .Values.kafka.nodePools.template.pod.topologySpreadConstraints }}
+        topologySpreadConstraints:
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
+        {{- with .Values.kafka.nodePools.template.pod.securityContext }}
+        securityContext:
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
+      podDisruptionBudget:
+        maxUnavailable: {{ .Values.kafka.nodePools.podDisruptionBudget.template.pod.maxUnavailable | default 0 }}
   {{- else }}
     replicas: {{ .Values.kafka.replicas }}
     resources:
