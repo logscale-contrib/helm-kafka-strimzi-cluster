@@ -65,9 +65,9 @@ spec:
   {{- if .Values.nodePools.enabled }}
     replicas: {{ .Values.nodePools.kafka.replicas | default 3 }}
     resources:
-      {{- toYaml .Values.kafka.resources | nindent 6 }}
+      {{- toYaml .Values.nodePools.kafka.resources | nindent 6 }}
     storage:
-      {{- toYaml .Values.kafka.storage | nindent 6 }}
+      {{- toYaml .Values.nodePools.kafka.storage | nindent 6 }}
     template:
       pod:
         {{- with .Values.nodePools.kafka.template.pod.affinity }}
