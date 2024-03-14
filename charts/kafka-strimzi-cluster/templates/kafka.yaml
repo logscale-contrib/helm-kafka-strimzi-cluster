@@ -62,7 +62,7 @@ spec:
       resources:
         {{- toYaml .Values.userOperator.resources | nindent 8 }}
   kafka:
-  {{- if not .Values.nodePools.enabled }}
+  {{- if ne .Values.nodePools.enabled true }}
     replicas: {{ .Values.kafka.replicas }}
     resources:
       {{- toYaml .Values.kafka.resources | nindent 6 }}
