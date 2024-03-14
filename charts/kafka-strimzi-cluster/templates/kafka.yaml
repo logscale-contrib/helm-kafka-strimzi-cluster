@@ -10,6 +10,9 @@ metadata:
   {{- else }}
     strimzi.io/node-pools: disabled
   {{- end }}
+  {{- if eq .Values.metadataMode "migration" }}
+    strimzi.io/kraft="migration"
+  {{- end }}
 spec:
   roles:
     - broker
