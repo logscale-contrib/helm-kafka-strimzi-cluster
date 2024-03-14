@@ -11,6 +11,8 @@ metadata:
     strimzi.io/node-pools: disabled
   {{- end }}
 spec:
+  roles:
+    - broker
   clientCa:
       generateCertificateAuthority: false
   cruiseControl:
