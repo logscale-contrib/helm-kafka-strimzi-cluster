@@ -62,7 +62,14 @@ spec:
       resources:
         {{- toYaml .Values.userOperator.resources | nindent 8 }}
   kafka:
-  {{- if not .Values.nodePools.enabled }}
+  {{- if .Values.nodePools.enabled }}
+    replicas: 0
+  {{- else }}
+    replicas: {{ .Values.kafka.replicas }}
+    resources:
+      {{- toYaml .Values.kafka.resources | nindent 6 }}
+    storage:
+      {{- toYaml .Values.kafka.storage | nindent 6 }}
     template:
       pod:
         {{- with .Values.kafka.affinity }}
@@ -86,13 +93,6 @@ spec:
         {{- end }}
       podDisruptionBudget:
         maxUnavailable: {{ .Values.kafka.podDisruptionBudget.maxUnavailable | default 0 }}
-    # fsGroup: 1000
-    # runAsUser: 1000
-    resources:
-      {{- toYaml .Values.kafka.resources | nindent 6 }}
-    replicas: {{ .Values.kafka.replicas }}
-    storage:
-      {{- toYaml .Values.kafka.storage | nindent 6 }}
   {{- end }}
     config:
       min.insync.replicas: 2
