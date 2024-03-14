@@ -77,20 +77,20 @@ spec:
         {{- if .Values.nodePools.kafka.template.pod.priorityClassName }}
         priorityClassName: {{ .Values.nodePools.kafka.template.pod.priorityClassName }}
         {{- end }}
-        {{- with .Values.kafka.nodePools.template.pod.tolerations }}
+        {{- with .Values.nodePools.kafka.template.pod.tolerations }}
         tolerations:
           {{- toYaml . | nindent 10 }}
         {{- end }}
-        {{- with .Values.kafka.nodePools.template.pod.topologySpreadConstraints }}
+        {{- with .Values.nodePools.kafka.template.pod.topologySpreadConstraints }}
         topologySpreadConstraints:
           {{- toYaml . | nindent 10 }}
         {{- end }}
-        {{- with .Values.kafka.nodePools.template.pod.securityContext }}
+        {{- with .Values.nodePools.kafka.template.pod.securityContext }}
         securityContext:
           {{- toYaml . | nindent 10 }}
         {{- end }}
       podDisruptionBudget:
-        maxUnavailable: {{ .Values.kafka.nodePools.podDisruptionBudget.template.pod.maxUnavailable | default 0 }}
+        maxUnavailable: {{ .Values.nodePools.kafka.template.pod.podDisruptionBudget.maxUnavailable | default 0 }}
   {{- else }}
     replicas: {{ .Values.kafka.replicas }}
     resources:
