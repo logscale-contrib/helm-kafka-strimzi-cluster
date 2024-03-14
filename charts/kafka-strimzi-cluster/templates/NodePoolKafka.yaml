@@ -2,7 +2,7 @@
 apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaNodePool
 metadata:
-  name: {{ include "kafka-strimzi-cluster.fullname" . }}
+  name: kafka
   labels:
     strimzi.io/cluster: {{ include "kafka-strimzi-cluster.fullname" . }}
     {{- include "kafka-strimzi-cluster.labels" . | nindent 4 }}
