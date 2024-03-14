@@ -70,7 +70,7 @@ spec:
       {{- toYaml .Values.kafka.storage | nindent 6 }}
     template:
       pod:
-        {{- with .Values.nodePools.kafkatemplate.pod.affinity }}
+        {{- with .Values.nodePools.kafka.template.pod.affinity }}
         affinity:
           {{- toYaml . | nindent 10 }}
         {{- end }}
