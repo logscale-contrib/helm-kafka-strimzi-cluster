@@ -1,4 +1,4 @@
-{{- if ne .Values.metadataMode "kraft" }}
+{{- if .Values.nodePools.controller.enabled }}
 apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaNodePool
 metadata:
