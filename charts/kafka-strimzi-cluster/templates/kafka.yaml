@@ -13,6 +13,9 @@ metadata:
   {{- if eq .Values.metadataMode "migration" }}
     strimzi.io/kraft: "migration"
   {{- end }}
+  {{- if eq .Values.metadataMode "enabled" }}
+    strimzi.io/kraft: "enabled"
+  {{- end }}
 spec:
   roles:
     - broker
