@@ -144,6 +144,7 @@ spec:
       superUsers:
         - {{ include "kafka-strimzi-cluster.fullname" . }}-kadmin
     {{- end }}
+{{- if or (eq .Values.metadataMode "migration") (eq .Values.metadataMode "zookeeper") }}
   zookeeper:
     template:
       pod:
@@ -173,3 +174,4 @@ spec:
     replicas: {{ .Values.zookeeper.replicas }}
     storage:
       {{- toYaml .Values.zookeeper.storage | nindent 6 }}
+{{- end }}
