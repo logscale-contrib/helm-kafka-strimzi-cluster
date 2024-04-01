@@ -97,8 +97,6 @@ spec:
         securityContext:
           {{- toYaml . | nindent 10 }}
         {{- end }}
-      podDisruptionBudget:
-        maxUnavailable: {{ .Values.kafka.podDisruptionBudget.maxUnavailable | default 0 }}
   {{- end }}
     config:
       min.insync.replicas: 2
@@ -170,8 +168,6 @@ spec:
         securityContext:
           {{- toYaml . | nindent 10 }}
         {{- end }}
-      podDisruptionBudget:
-        maxUnavailable: {{ .Values.zookeeper.podDisruptionBudget.maxUnavailable | default 0 }}
     resources:
       {{- toYaml .Values.zookeeper.resources | nindent 6 }}
     replicas: {{ .Values.zookeeper.replicas }}

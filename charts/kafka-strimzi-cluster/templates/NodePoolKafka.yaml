@@ -33,8 +33,6 @@ spec:
         securityContext:
           {{- toYaml . | nindent 10 }}
         {{- end }}
-      podDisruptionBudget:
-        maxUnavailable: {{ .Values.nodePools.kafka.template.pod.podDisruptionBudget.maxUnavailable | default 0 }}
 
   resources:
     {{- toYaml .Values.nodePools.kafka.resources | nindent 4 }}

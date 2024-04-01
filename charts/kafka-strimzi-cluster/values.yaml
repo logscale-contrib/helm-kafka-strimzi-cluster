@@ -1,11 +1,6 @@
 metadataMode: zookeeper
 nodePools:
   enabled: false
-  kafka:
-    template:
-      pod:
-        podDisruptionBudget:
-          maxUnavailable: 0
   controller:
     enabled: false
     resources:
@@ -128,8 +123,6 @@ kafka:
   authorization:
     enabled: true
     type: simple
-  podDisruptionBudget:
-    maxUnavailable: 0
   resources:
     {}
     # We usually recommend not to specify default resources and to leave this as a conscious
@@ -169,8 +162,6 @@ kafka:
 
 zookeeper:
   replicas: 3
-  podDisruptionBudget:
-    maxUnavailable: 0
   resources:
     {}
     # We usually recommend not to specify default resources and to leave this as a conscious
