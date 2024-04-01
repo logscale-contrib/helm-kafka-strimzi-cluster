@@ -1,6 +1,6 @@
 # kafka-strimzi-cluster
 
-![Version: 4.0.0-next.16](https://img.shields.io/badge/Version-4.0.0--next.16-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 4.0.0-next.16](https://img.shields.io/badge/AppVersion-4.0.0--next.16-informational?style=flat-square)
+![Version: 4.0.0-next.17](https://img.shields.io/badge/Version-4.0.0--next.17-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 4.0.0-next.17](https://img.shields.io/badge/AppVersion-4.0.0--next.17-informational?style=flat-square)
 
 A Chart for deployment and testing of a opinionated kafka cluster using strimzi
 
@@ -37,7 +37,6 @@ A Chart for deployment and testing of a opinionated kafka cluster using strimzi
 | kafka.listeners.internal.tls.certManager.issuerRef.name | string | `nil` |  |
 | kafka.listeners.internal.tls.enabled | bool | `true` |  |
 | kafka.nodeSelector | object | `{}` |  |
-| kafka.podDisruptionBudget.maxUnavailable | int | `0` |  |
 | kafka.replicas | int | `3` |  |
 | kafka.resources | object | `{}` |  |
 | kafka.securityContext | object | `{}` |  |
@@ -48,7 +47,6 @@ A Chart for deployment and testing of a opinionated kafka cluster using strimzi
 | nodePools.controller.resources | object | `{}` |  |
 | nodePools.controller.storage | string | `nil` |  |
 | nodePools.enabled | bool | `false` |  |
-| nodePools.kafka.template.pod.podDisruptionBudget.maxUnavailable | int | `0` |  |
 | topicOperator.affinity | object | `{}` |  |
 | topicOperator.autoscaling.enabled | bool | `false` |  |
 | topicOperator.autoscaling.maxReplicas | int | `100` |  |
@@ -71,7 +69,6 @@ A Chart for deployment and testing of a opinionated kafka cluster using strimzi
 | zookeeper.autoscaling.minReplicas | int | `1` |  |
 | zookeeper.autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
 | zookeeper.nodeSelector | object | `{}` |  |
-| zookeeper.podDisruptionBudget.maxUnavailable | int | `0` |  |
 | zookeeper.replicas | int | `3` |  |
 | zookeeper.resources | object | `{}` |  |
 | zookeeper.securityContext | object | `{}` |  |
