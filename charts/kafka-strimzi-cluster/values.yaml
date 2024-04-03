@@ -21,6 +21,9 @@ nodePools:
       # deleteClaim: true
       # Must be SSD or NVME like storage IOPs is the primary node constraint
       # class:
+  kafka:
+    template:
+      pod: {}
 
 cruiseControl:
   resources:
