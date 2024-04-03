@@ -1,6 +1,6 @@
 # kafka-strimzi-cluster
 
-![Version: 4.0.0-next.17](https://img.shields.io/badge/Version-4.0.0--next.17-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 4.0.0-next.17](https://img.shields.io/badge/AppVersion-4.0.0--next.17-informational?style=flat-square)
+![Version: 4.0.0-next.18](https://img.shields.io/badge/Version-4.0.0--next.18-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 4.0.0-next.18](https://img.shields.io/badge/AppVersion-4.0.0--next.18-informational?style=flat-square)
 
 A Chart for deployment and testing of a opinionated kafka cluster using strimzi
 
@@ -47,6 +47,7 @@ A Chart for deployment and testing of a opinionated kafka cluster using strimzi
 | nodePools.controller.resources | object | `{}` |  |
 | nodePools.controller.storage | string | `nil` |  |
 | nodePools.enabled | bool | `false` |  |
+| nodePools.kafka.template.pod | object | `{}` |  |
 | topicOperator.affinity | object | `{}` |  |
 | topicOperator.autoscaling.enabled | bool | `false` |  |
 | topicOperator.autoscaling.maxReplicas | int | `100` |  |
