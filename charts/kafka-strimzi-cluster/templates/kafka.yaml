@@ -19,7 +19,7 @@ metadata:
 spec:
   roles:
     - broker
-  clientCa:
+  clientsCa:
       generateCertificateAuthority: false
   cruiseControl:
     template:
