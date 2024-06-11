@@ -1,8 +1,8 @@
-metadataMode: zookeeper
 nodePools:
-  enabled: false
-  controller:
-    enabled: false
+  enabled: true
+  kafka:
+
+    enabled: true
     resources:
       {}
       # We usually recommend not to specify default resources and to leave this as a conscious
@@ -21,10 +21,6 @@ nodePools:
       # deleteClaim: true
       # Must be SSD or NVME like storage IOPs is the primary node constraint
       # class:
-  kafka:
-    template:
-      pod: {}
-
 cruiseControl:
   resources:
     {}
@@ -108,24 +104,6 @@ userOperator:
 
 kafka:
   replicas: 3
-  listeners:
-    internal:
-      plain:
-        enabled: false
-      tls:
-        enabled: true
-        certManager:
-          enabled: false
-          issuerRef:
-            name:
-            kind: ClusterIssuer
-        # secretName:
-        authentication:
-          enabled: true
-          type: tls
-  authorization:
-    enabled: true
-    type: simple
   resources:
     {}
     # We usually recommend not to specify default resources and to leave this as a conscious
@@ -139,16 +117,11 @@ kafka:
     #   cpu: 100m
     #   memory: 128Mi
   storage:
-    # type: persistent-claim
-    # size: 50Gi
-    # deleteClaim: true
+    type: persistent-claim
+    size: 50Gi
+    deleteClaim: true
     # Must be SSD or NVME like storage IOPs is the primary node constraint
     # class:
-
-  securityContext:
-    {}
-    # fsGroup: 1000
-    # runAsUser: 1000
 
   autoscaling:
     enabled: false
@@ -178,9 +151,9 @@ zookeeper:
     #   cpu: 100m
     #   memory: 128Mi
   storage:
-    # type: persistent-claim
-    # size: 5Gi
-    # deleteClaim: true
+    type: persistent-claim
+    size: 5Gi
+    deleteClaim: true
     # Must be SSD or NVME like storage IOPs is the primary node constraint
     # class:
 
@@ -196,8 +169,3 @@ zookeeper:
   tolerations: []
 
   affinity: {}
-
-  securityContext:
-    {}
-    # fsGroup: 1000
-    # runAsUser: 1000

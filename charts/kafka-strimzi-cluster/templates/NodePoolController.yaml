@@ -1,0 +1,17 @@
+{{- if .Values.nodePools.controller.enabled }}
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaNodePool
+metadata:
+  name: controller
+  labels:
+    strimzi.io/cluster: {{ include "kafka-strimzi-cluster.fullname" . }}
+    {{- include "kafka-strimzi-cluster.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.nodePools.controller.replicas | default 3 }}
+  roles:
+    - controller
+  storage:
+    {{- toYaml .Values.nodePools.controller.storage | nindent 4 }}
+  resources:
+    {{- toYaml .Values.nodePools.controller.resources | nindent 4 }}
+{{- end }}

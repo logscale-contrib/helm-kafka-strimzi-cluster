@@ -4,8 +4,22 @@ metadata:
   name: {{ include "kafka-strimzi-cluster.fullname" . }}
   labels:
     {{- include "kafka-strimzi-cluster.labels" . | nindent 4 }}
+  annotations:
+  {{- if .Values.nodePools.enabled}}
+    strimzi.io/node-pools: enabled
+  {{- else }}
+    strimzi.io/node-pools: disabled
+  {{- end }}
+  {{- if eq .Values.metadataMode "migration" }}
+    strimzi.io/kraft: "migration"
+  {{- end }}
+  {{- if eq .Values.metadataMode "enabled" }}
+    strimzi.io/kraft: "enabled"
+  {{- end }}
 spec:
-  clientCa:
+  roles:
+    - broker
+  clientsCa:
       generateCertificateAuthority: false
   cruiseControl:
     template:
@@ -56,6 +70,12 @@ spec:
       resources:
         {{- toYaml .Values.userOperator.resources | nindent 8 }}
   kafka:
+  {{- if ne .Values.nodePools.enabled true }}
+    replicas: {{ .Values.kafka.replicas }}
+    resources:
+      {{- toYaml .Values.kafka.resources | nindent 6 }}
+    storage:
+      {{- toYaml .Values.kafka.storage | nindent 6 }}
     template:
       pod:
         {{- with .Values.kafka.affinity }}
@@ -77,12 +97,7 @@ spec:
         securityContext:
           {{- toYaml . | nindent 10 }}
         {{- end }}
-      podDisruptionBudget:
-        maxUnavailable: {{ .Values.kafka.podDisruptionBudget.maxUnavailable | default 0 }}
-    # fsGroup: 1000
-    # runAsUser: 1000
-    resources:
-      {{- toYaml .Values.kafka.resources | nindent 6 }}
+  {{- end }}
     config:
       min.insync.replicas: 2
       auto.create.topics.enable: {{ .Values.kafka.allowAutoCreate | default false }}
@@ -130,11 +145,7 @@ spec:
       superUsers:
         - {{ include "kafka-strimzi-cluster.fullname" . }}-kadmin
     {{- end }}
-
-    replicas: {{ .Values.kafka.replicas }}
-    storage:
-      {{- toYaml .Values.kafka.storage | nindent 6 }}
-
+{{- if or (eq .Values.metadataMode "migration") (eq .Values.metadataMode "zookeeper") }}
   zookeeper:
     template:
       pod:
@@ -157,10 +168,9 @@ spec:
         securityContext:
           {{- toYaml . | nindent 10 }}
         {{- end }}
-      podDisruptionBudget:
-        maxUnavailable: {{ .Values.zookeeper.podDisruptionBudget.maxUnavailable | default 0 }}
     resources:
       {{- toYaml .Values.zookeeper.resources | nindent 6 }}
     replicas: {{ .Values.zookeeper.replicas }}
     storage:
       {{- toYaml .Values.zookeeper.storage | nindent 6 }}
+{{- end }}
