@@ -17,8 +17,6 @@ metadata:
     strimzi.io/kraft: "enabled"
   {{- end }}
 spec:
-  roles:
-    - broker
   clientsCa:
       generateCertificateAuthority: false
   cruiseControl:
