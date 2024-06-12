@@ -17,8 +17,6 @@ metadata:
     strimzi.io/kraft: "enabled"
   {{- end }}
 spec:
-  clientsCa:
-      generateCertificateAuthority: false
   cruiseControl:
     template:
       pod:
