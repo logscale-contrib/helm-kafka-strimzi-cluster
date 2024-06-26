@@ -27,9 +27,9 @@ nodePools:
 
 cruiseControl:
   skipHardGoalCheck: false
-  # brokerCapacity:
-  #   inboundNetwork: 10000KiB/s
-  #   outboundNetwork: 10000KiB/s
+  brokerCapacity:
+    inboundNetwork: 10000KiB/s
+    outboundNetwork: 10000KiB/s
   goals:
     - NetworkInboundCapacityGoal
     - DiskCapacityGoal

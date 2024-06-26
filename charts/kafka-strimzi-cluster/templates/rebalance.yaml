@@ -7,10 +7,6 @@ metadata:
     {{- include "kafka-strimzi-cluster.labels" . | nindent 4 }}
 spec:
   skipHardGoalCheck: {{ .Values.cruiseControl.skipHardGoalCheck }}
-  {{- with .Values.cruiseControl.brokerCapacity }}
-  brokerCapacity:
-    {{- toYaml . | nindent 4 }}
-  {{- end }}
   {{- with .Values.cruiseControl.goals }}
   goals:
     {{- toYaml . | nindent 4 }}

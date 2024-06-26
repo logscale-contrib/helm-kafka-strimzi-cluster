@@ -18,6 +18,10 @@ metadata:
   {{- end }}
 spec:
   cruiseControl:
+    {{- with .Values.cruiseControl.brokerCapacity }}
+    brokerCapacity:
+      {{- toYaml . | nindent 6 }}
+    {{- end }}
     {{- with .Values.cruiseControl.config }}
     config:
       {{- toYaml . | nindent 6 }}
