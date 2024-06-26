@@ -26,6 +26,9 @@ nodePools:
       pod: {}
 
 cruiseControl:
+  # brokerCapacity:
+  #   inboundNetwork: 10000KiB/s
+  #   outboundNetwork: 10000KiB/s
   goals:
     - NetworkInboundCapacityGoal
     - DiskCapacityGoal
