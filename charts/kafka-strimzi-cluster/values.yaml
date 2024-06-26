@@ -26,6 +26,7 @@ nodePools:
       pod: {}
 
 cruiseControl:
+  skipHardGoalCheck: false
   # brokerCapacity:
   #   inboundNetwork: 10000KiB/s
   #   outboundNetwork: 10000KiB/s
