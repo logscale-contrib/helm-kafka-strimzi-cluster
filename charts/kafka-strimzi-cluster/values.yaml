@@ -26,6 +26,13 @@ nodePools:
       pod: {}
 
 cruiseControl:
+  goals:
+    - NetworkInboundCapacityGoal
+    - DiskCapacityGoal
+    - RackAwareGoal
+    - NetworkOutboundCapacityGoal
+    - CpuCapacityGoal
+    - ReplicaCapacityGoal
   resources:
     {}
     # We usually recommend not to specify default resources and to leave this as a conscious

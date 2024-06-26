@@ -1,0 +1,12 @@
+apiVersion: kafka.strimzi.io/v1alpha1
+kind: KafkaRebalance
+metadata:
+  name: {{ include "kafka-strimzi-cluster.fullname" . }}
+  labels:
+    strimzi.io/cluster: {{ include "kafka-strimzi-cluster.fullname" . }}
+    {{- include "kafka-strimzi-cluster.labels" . | nindent 4 }}
+spec:
+  {{- with .Values.cruiseControl.goals }}
+  goals:
+    {{- toYaml . | nindent 6 }}
+  {{- end }}
