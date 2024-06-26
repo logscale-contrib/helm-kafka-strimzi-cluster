@@ -1,6 +1,6 @@
 # kafka-strimzi-cluster
 
-![Version: 4.3.4](https://img.shields.io/badge/Version-4.3.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 4.3.4](https://img.shields.io/badge/AppVersion-4.3.4-informational?style=flat-square)
+![Version: 4.3.5](https://img.shields.io/badge/Version-4.3.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 4.3.5](https://img.shields.io/badge/AppVersion-4.3.5-informational?style=flat-square)
 
 A Chart for deployment and testing of a opinionated kafka cluster using strimzi
 
@@ -19,6 +19,8 @@ A Chart for deployment and testing of a opinionated kafka cluster using strimzi
 | cruiseControl.autoscaling.maxReplicas | int | `100` |  |
 | cruiseControl.autoscaling.minReplicas | int | `1` |  |
 | cruiseControl.autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
+| cruiseControl.brokerCapacity.inboundNetwork | string | `"10000KiB/s"` |  |
+| cruiseControl.brokerCapacity.outboundNetwork | string | `"10000KiB/s"` |  |
 | cruiseControl.goals[0] | string | `"NetworkInboundCapacityGoal"` |  |
 | cruiseControl.goals[1] | string | `"DiskCapacityGoal"` |  |
 | cruiseControl.goals[2] | string | `"RackAwareGoal"` |  |
