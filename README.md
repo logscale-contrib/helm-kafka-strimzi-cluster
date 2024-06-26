@@ -1,6 +1,6 @@
 # kafka-strimzi-cluster
 
-![Version: 4.3.3](https://img.shields.io/badge/Version-4.3.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 4.3.3](https://img.shields.io/badge/AppVersion-4.3.3-informational?style=flat-square)
+![Version: 4.3.4](https://img.shields.io/badge/Version-4.3.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 4.3.4](https://img.shields.io/badge/AppVersion-4.3.4-informational?style=flat-square)
 
 A Chart for deployment and testing of a opinionated kafka cluster using strimzi
 
@@ -27,6 +27,7 @@ A Chart for deployment and testing of a opinionated kafka cluster using strimzi
 | cruiseControl.goals[5] | string | `"ReplicaCapacityGoal"` |  |
 | cruiseControl.nodeSelector | object | `{}` |  |
 | cruiseControl.resources | object | `{}` |  |
+| cruiseControl.skipHardGoalCheck | bool | `false` |  |
 | cruiseControl.tolerations | list | `[]` |  |
 | kafka.affinity | object | `{}` |  |
 | kafka.authorization.enabled | bool | `true` |  |
