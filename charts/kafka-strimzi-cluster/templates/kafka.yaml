@@ -18,6 +18,10 @@ metadata:
   {{- end }}
 spec:
   cruiseControl:
+  {{- with .Values.cruiseControl.config }}
+    config:
+      {{- toYaml . | nindent 6 }}
+    {{- end }}
     template:
       pod:
         {{- with .Values.cruiseControl.affinity }}
