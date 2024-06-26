@@ -102,7 +102,7 @@ spec:
       transaction.state.log.min.isr: 2
       transaction.state.log.replication.factor: 3
       replica.selector.class: org.apache.kafka.common.replica.RackAwareReplicaSelector
-    {{- if .Values.kafka.rack.topologyKey }}
+    {{- if .Values.kafka.rack.enabled }}
     rack:
       topologyKey: {{ .Values.kafka.rack.topologyKey }}
     {{- end }}

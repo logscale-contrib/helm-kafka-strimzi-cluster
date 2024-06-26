@@ -109,6 +109,7 @@ userOperator:
 kafka:
   replicas: 3
   rack:
+    enabled: true
     topologyKey: topology.kubernetes.io/zone
   listeners:
     internal:
