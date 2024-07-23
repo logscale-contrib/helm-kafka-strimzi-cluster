@@ -143,6 +143,7 @@ jobs:
         with:
           submodules: false
           persist-credentials: false
+          fetch-depth: 0
 
       - name: Login to ghcr for helm
         run: |
