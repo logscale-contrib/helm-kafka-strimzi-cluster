@@ -151,11 +151,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "18"
+
       - uses: azure/setup-helm@v4
-      - run: |
-          eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-          echo 'PATH="/usr/local/bin:$PATH"' >> ~/.bash_profile
-          . .profile
+      - name: Setup Homebrew
+        uses: Homebrew/actions/setup-homebrew@master      
           brew tap helm/tap
           brew install chart-releaser
       - name: Semantic Release
