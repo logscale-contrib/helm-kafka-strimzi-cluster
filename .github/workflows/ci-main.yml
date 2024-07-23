@@ -155,6 +155,7 @@ jobs:
       - uses: azure/setup-helm@v4
       - name: Setup Homebrew
         uses: Homebrew/actions/setup-homebrew@master      
+      - run: |
           brew tap helm/tap
           brew install chart-releaser
       - name: Semantic Release
