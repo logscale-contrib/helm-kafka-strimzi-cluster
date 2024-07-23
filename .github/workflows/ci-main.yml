@@ -154,6 +154,8 @@ jobs:
       - uses: azure/setup-helm@v4
       - run: |
           eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+          echo 'PATH="/usr/local/bin:$PATH"' >> ~/.bash_profile
+          . .profile
           brew tap helm/tap
           brew install chart-releaser
       - name: Semantic Release
