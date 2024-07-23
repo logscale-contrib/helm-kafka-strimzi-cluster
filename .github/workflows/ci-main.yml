@@ -153,6 +153,10 @@ jobs:
           node-version: "18"
       - uses: azure/setup-helm@v4
       - run: |
+          test -d ~/.linuxbrew && eval "$(~/.linuxbrew/bin/brew shellenv)"
+          test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+          echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >> ~/.bashrc
+      - run: |
           brew tap helm/tap
           brew install chart-releaser
       - name: Semantic Release
