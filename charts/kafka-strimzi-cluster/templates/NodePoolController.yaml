@@ -10,6 +10,8 @@ spec:
   replicas: {{ .Values.nodePools.controller.replicas | default 3 }}
   roles:
     - controller
+  jvmOptions:
+    {{- toYaml .Values.nodePools.controller.jvmOptions | nindent 4 }}  
   storage:
     {{- toYaml .Values.nodePools.controller.storage | nindent 4 }}
   resources:

@@ -12,6 +12,8 @@ spec:
     - broker
   storage:
     {{- toYaml .Values.nodePools.kafka.storage | nindent 4 }}
+  jvmOptions:
+    {{- toYaml .Values.nodePools.kafka.jvmOptions | nindent 4 }}  
   template:
     pod:
         {{- with .Values.nodePools.kafka.template.pod.affinity }}
