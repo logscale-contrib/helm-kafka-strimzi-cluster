@@ -28,8 +28,8 @@ nodePools:
 cruiseControl:
   skipHardGoalCheck: false
   brokerCapacity:
-    inboundNetwork: 10000KiB/s
-    outboundNetwork: 10000KiB/s
+    inboundNetwork: 15728640KiB/s
+    outboundNetwork: 15728640KiB/s
   goals:
     - NetworkInboundCapacityGoal
     - DiskCapacityGoal
@@ -119,6 +119,33 @@ userOperator:
 
 kafka:
   replicas: 3
+  config:
+    min.insync.replicas: 2
+    default.replication.factor: 3
+    offsets.topic.replication.factor: 3
+    transaction.state.log.min.isr: 2
+    transaction.state.log.replication.factor: 3
+    # For storage where storage is thin provisioned enable
+    # log.preallocate: true
+    # background threads include replication for very high throughput increase based on available CPU cores and usage default is 10
+    # background.threads: 20
+    # num.io.threads increase based on available CPU cores and usage default is 8
+    # num.io.threads: 20
+    # num.network.threads increase based on available CPU cores and usage default is 3
+    # num.network.threads: 6
+    # num.replica.fetchers increase based on available CPU cores and usage default is 1
+    # num.replica.fetchers: 10
+
+    # replica.socket.receive.buffer.bytes: 65536 increased for higher replication throughput based on memory
+    # replica.socket.receive.buffer.bytes: 1000000
+
+    # socket.receive.buffer.bytes: 102400 default setting to -1 to use OS default
+    socket.receive.buffer.bytes: -1
+    # socket.request.max.bytes: 104857600 default setting to 100MB probably should not change
+    # socket.send.buffer.bytes: 102400 default setting to -1 to use OS default
+    socket.send.buffer.bytes: -1
+    
+
   rack:
     enabled: true
     topologyKey: topology.kubernetes.io/zone

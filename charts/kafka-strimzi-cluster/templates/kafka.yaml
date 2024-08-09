@@ -102,13 +102,11 @@ spec:
           {{- toYaml . | nindent 10 }}
         {{- end }}
   {{- end }}
-    config:
-      min.insync.replicas: 2
+    config:      
       auto.create.topics.enable: {{ .Values.kafka.allowAutoCreate | default false }}
-      default.replication.factor: 3
-      offsets.topic.replication.factor: 3
-      transaction.state.log.min.isr: 2
-      transaction.state.log.replication.factor: 3
+      {{- with .Values.kafka.config }}
+      {{- toYaml . | nindent 6 }}
+      {{- end }}      
     {{- if .Values.kafka.rack.enabled }}
       replica.selector.class: org.apache.kafka.common.replica.RackAwareReplicaSelector
     rack:
