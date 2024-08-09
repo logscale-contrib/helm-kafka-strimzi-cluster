@@ -1,6 +1,6 @@
 # kafka-strimzi-cluster
 
-![Version: 4.4.0](https://img.shields.io/badge/Version-4.4.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 4.4.0](https://img.shields.io/badge/AppVersion-4.4.0-informational?style=flat-square)
+![Version: 4.5.0](https://img.shields.io/badge/Version-4.5.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 4.5.0](https://img.shields.io/badge/AppVersion-4.5.0-informational?style=flat-square)
 
 A Chart for deployment and testing of a opinionated kafka cluster using strimzi
 
@@ -62,9 +62,21 @@ A Chart for deployment and testing of a opinionated kafka cluster using strimzi
 | kafka.tolerations | list | `[]` |  |
 | metadataMode | string | `"zookeeper"` |  |
 | nodePools.controller.enabled | bool | `false` |  |
+| nodePools.controller.jvmOptions.-XX.ExplicitGCInvokesConcurrent | string | `"true"` |  |
+| nodePools.controller.jvmOptions.-XX.InitiatingHeapOccupancyPercent | string | `"35"` |  |
+| nodePools.controller.jvmOptions.-XX.MaxGCPauseMillis | string | `"20"` |  |
+| nodePools.controller.jvmOptions.-XX.UseG1GC | string | `"true"` |  |
+| nodePools.controller.jvmOptions.-Xms | string | `"5g"` |  |
+| nodePools.controller.jvmOptions.-Xmx | string | `"5g"` |  |
 | nodePools.controller.resources | object | `{}` |  |
 | nodePools.controller.storage | string | `nil` |  |
 | nodePools.enabled | bool | `false` |  |
+| nodePools.kafka.jvmOptions.-XX.ExplicitGCInvokesConcurrent | string | `"true"` |  |
+| nodePools.kafka.jvmOptions.-XX.InitiatingHeapOccupancyPercent | string | `"35"` |  |
+| nodePools.kafka.jvmOptions.-XX.MaxGCPauseMillis | string | `"20"` |  |
+| nodePools.kafka.jvmOptions.-XX.UseG1GC | string | `"true"` |  |
+| nodePools.kafka.jvmOptions.-Xms | string | `"5g"` |  |
+| nodePools.kafka.jvmOptions.-Xmx | string | `"5g"` |  |
 | nodePools.kafka.template.pod | object | `{}` |  |
 | topicOperator.affinity | object | `{}` |  |
 | topicOperator.autoscaling.enabled | bool | `false` |  |
