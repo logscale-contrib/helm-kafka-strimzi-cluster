@@ -1,6 +1,6 @@
 # kafka-strimzi-cluster
 
-![Version: 4.3.9](https://img.shields.io/badge/Version-4.3.9-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 4.3.9](https://img.shields.io/badge/AppVersion-4.3.9-informational?style=flat-square)
+![Version: 4.4.0](https://img.shields.io/badge/Version-4.4.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 4.4.0](https://img.shields.io/badge/AppVersion-4.4.0-informational?style=flat-square)
 
 A Chart for deployment and testing of a opinionated kafka cluster using strimzi
 
@@ -19,8 +19,8 @@ A Chart for deployment and testing of a opinionated kafka cluster using strimzi
 | cruiseControl.autoscaling.maxReplicas | int | `100` |  |
 | cruiseControl.autoscaling.minReplicas | int | `1` |  |
 | cruiseControl.autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
-| cruiseControl.brokerCapacity.inboundNetwork | string | `"10000KiB/s"` |  |
-| cruiseControl.brokerCapacity.outboundNetwork | string | `"10000KiB/s"` |  |
+| cruiseControl.brokerCapacity.inboundNetwork | string | `"15728640KiB/s"` |  |
+| cruiseControl.brokerCapacity.outboundNetwork | string | `"15728640KiB/s"` |  |
 | cruiseControl.goals[0] | string | `"NetworkInboundCapacityGoal"` |  |
 | cruiseControl.goals[1] | string | `"DiskCapacityGoal"` |  |
 | cruiseControl.goals[2] | string | `"RackAwareGoal"` |  |
@@ -38,6 +38,13 @@ A Chart for deployment and testing of a opinionated kafka cluster using strimzi
 | kafka.autoscaling.maxReplicas | int | `100` |  |
 | kafka.autoscaling.minReplicas | int | `1` |  |
 | kafka.autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
+| kafka.config."default.replication.factor" | int | `3` |  |
+| kafka.config."min.insync.replicas" | int | `2` |  |
+| kafka.config."offsets.topic.replication.factor" | int | `3` |  |
+| kafka.config."socket.receive.buffer.bytes" | int | `-1` |  |
+| kafka.config."socket.send.buffer.bytes" | int | `-1` |  |
+| kafka.config."transaction.state.log.min.isr" | int | `2` |  |
+| kafka.config."transaction.state.log.replication.factor" | int | `3` |  |
 | kafka.listeners.internal.plain.enabled | bool | `false` |  |
 | kafka.listeners.internal.tls.authentication.enabled | bool | `true` |  |
 | kafka.listeners.internal.tls.authentication.type | string | `"tls"` |  |
