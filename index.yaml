@@ -2,6 +2,19 @@ apiVersion: v1
 entries:
   kafka-strimzi-cluster:
   - apiVersion: v2
+    appVersion: 4.5.1
+    created: "2024-08-09T16:02:17.432380824Z"
+    description: 'A Chart for deployment and testing of a opinionated kafka cluster
+      using strimzi '
+    digest: 79f0d8f3121455f35634f30766963c093d34f2150304d6353e72cdc1ba1364b8
+    maintainers:
+    - name: ryanfaircloth
+    name: kafka-strimzi-cluster
+    type: application
+    urls:
+    - https://github.com/logscale-contrib/helm-kafka-strimzi-cluster/releases/download/v4.5.1/kafka-strimzi-cluster-4.5.1.tgz
+    version: 4.5.1
+  - apiVersion: v2
     appVersion: 4.5.0
     created: "2024-08-09T15:54:12.390910943Z"
     description: 'A Chart for deployment and testing of a opinionated kafka cluster
@@ -118,4 +131,4 @@ entries:
     urls:
     - https://github.com/logscale-contrib/helm-kafka-strimzi-cluster/releases/download/v2.0.0-next.5/kafka-strimzi-cluster-2.0.0-next.5.tgz
     version: 2.0.0-next.5
-generated: "2024-08-09T15:54:12.390939255Z"
+generated: "2024-08-09T16:02:17.432436608Z"
