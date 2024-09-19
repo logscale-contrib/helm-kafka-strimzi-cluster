@@ -1,4 +1,3 @@
-{{- if .Values.nodePools.controller.enabled }}
 apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaNodePool
 metadata:
@@ -37,4 +36,3 @@ spec:
         securityContext:
           {{- toYaml . | nindent 10 }}
         {{- end }}
-{{- end }}
