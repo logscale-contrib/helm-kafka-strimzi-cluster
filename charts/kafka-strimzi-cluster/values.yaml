@@ -133,7 +133,6 @@ userOperator:
   affinity: {}
 
 kafka:
-  replicas: 3
   config:
     min.insync.replicas: 2
     default.replication.factor: 3
