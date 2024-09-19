@@ -1,6 +1,6 @@
 # kafka-strimzi-cluster
 
-![Version: 5.0.0-next.1](https://img.shields.io/badge/Version-5.0.0--next.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 5.0.0-next.1](https://img.shields.io/badge/AppVersion-5.0.0--next.1-informational?style=flat-square)
+![Version: 5.0.0-next.2](https://img.shields.io/badge/Version-5.0.0--next.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 5.0.0-next.2](https://img.shields.io/badge/AppVersion-5.0.0--next.2-informational?style=flat-square)
 
 A Chart for deployment and testing of a opinionated kafka cluster using strimzi
 
@@ -49,7 +49,6 @@ A Chart for deployment and testing of a opinionated kafka cluster using strimzi
 | kafka.listeners.internal.tls.enabled | bool | `true` |  |
 | kafka.rack.enabled | bool | `true` |  |
 | kafka.rack.topologyKey | string | `"topology.kubernetes.io/zone"` |  |
-| kafka.replicas | int | `3` |  |
 | nodePools.controller.enabled | bool | `false` |  |
 | nodePools.controller.jvmOptions.-XX.ExplicitGCInvokesConcurrent | string | `"true"` |  |
 | nodePools.controller.jvmOptions.-XX.InitiatingHeapOccupancyPercent | string | `"35"` |  |
