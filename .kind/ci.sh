@@ -2,7 +2,7 @@
 helm repo add strimzi https://strimzi.io/charts/
 helm repo add cert-manager https://charts.jetstack.io
 helm upgrade --install --create-namespace --namespace strimzi \
-    strimzi strimzi/strimzi-kafka-operator --version ${V_STRIMZI_OPERATOR:-0.37.0} \
+    strimzi strimzi/strimzi-kafka-operator --version ${V_STRIMZI_OPERATOR:-0.43.0} \
     -f .kind/strimzi-operator-values.yaml --wait
 helm upgrade --install --create-namespace --namespace cert-manager \
     cert-manager cert-manager/cert-manager --version ${V_CERT_MANAGER:-1.13.1} \
