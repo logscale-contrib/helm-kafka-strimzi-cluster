@@ -5,17 +5,8 @@ metadata:
   labels:
     {{- include "kafka-strimzi-cluster.labels" . | nindent 4 }}
   annotations:
-  {{- if .Values.nodePools.enabled}}
     strimzi.io/node-pools: enabled
-  {{- else }}
-    strimzi.io/node-pools: disabled
-  {{- end }}
-  {{- if eq .Values.metadataMode "migration" }}
-    strimzi.io/kraft: "migration"
-  {{- end }}
-  {{- if eq .Values.metadataMode "enabled" }}
     strimzi.io/kraft: "enabled"
-  {{- end }}
 spec:
   cruiseControl:
     {{- with .Values.cruiseControl.brokerCapacity }}
@@ -74,34 +65,7 @@ spec:
       resources:
         {{- toYaml .Values.userOperator.resources | nindent 8 }}
   kafka:
-  {{- if ne .Values.nodePools.enabled true }}
-    replicas: {{ .Values.kafka.replicas }}
-    resources:
-      {{- toYaml .Values.kafka.resources | nindent 6 }}
-    storage:
-      {{- toYaml .Values.kafka.storage | nindent 6 }}
-    template:
-      pod:
-        {{- with .Values.kafka.affinity }}
-        affinity:
-          {{- toYaml . | nindent 10 }}
-        {{- end }}
-        {{- if .Values.kafka.priorityClassName }}
-        priorityClassName: {{ .Values.kafka.priorityClassName }}
-        {{- end }}
-        {{- with .Values.kafka.tolerations }}
-        tolerations:
-          {{- toYaml . | nindent 10 }}
-        {{- end }}
-        {{- with .Values.kafka.topologySpreadConstraints }}
-        topologySpreadConstraints:
-          {{- toYaml . | nindent 10 }}
-        {{- end }}
-        {{- with .Values.kafka.securityContext }}
-        securityContext:
-          {{- toYaml . | nindent 10 }}
-        {{- end }}
-  {{- end }}
+
     config:      
       auto.create.topics.enable: {{ .Values.kafka.allowAutoCreate | default false }}
       {{- with .Values.kafka.config }}
@@ -149,32 +113,3 @@ spec:
       superUsers:
         - {{ include "kafka-strimzi-cluster.fullname" . }}-kadmin
     {{- end }}
-{{- if or (eq .Values.metadataMode "migration") (eq .Values.metadataMode "zookeeper") }}
-  zookeeper:
-    template:
-      pod:
-        {{- with .Values.zookeeper.affinity }}
-        affinity:
-          {{- toYaml . | nindent 10 }}
-        {{- end }}
-        {{- if .Values.zookeeper.priorityClassName }}
-        priorityClassName: {{ .Values.zookeeper.priorityClassName }}
-        {{- end }}
-        {{- with .Values.zookeeper.tolerations }}
-        tolerations:
-          {{- toYaml . | nindent 10 }}
-        {{- end }}
-        {{- with .Values.zookeeper.topologySpreadConstraints }}
-        topologySpreadConstraints:
-          {{- toYaml . | nindent 10 }}
-        {{- end }}
-        {{- with .Values.zookeeper.securityContext }}
-        securityContext:
-          {{- toYaml . | nindent 10 }}
-        {{- end }}
-    resources:
-      {{- toYaml .Values.zookeeper.resources | nindent 6 }}
-    replicas: {{ .Values.zookeeper.replicas }}
-    storage:
-      {{- toYaml .Values.zookeeper.storage | nindent 6 }}
-{{- end }}
