@@ -133,6 +133,7 @@ userOperator:
   affinity: {}
 
 kafka:
+  jmxOptions: {}
   config:
     min.insync.replicas: 2
     default.replication.factor: 3

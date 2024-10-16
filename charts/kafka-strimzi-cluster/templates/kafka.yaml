@@ -65,7 +65,10 @@ spec:
       resources:
         {{- toYaml .Values.userOperator.resources | nindent 8 }}
   kafka:
-
+    {{ with .Values.kafka.jmxOptions }}
+    jmxOptions: 
+    {{- toYaml . | nindent 6 }}
+    {{- end }}          
     config:      
       auto.create.topics.enable: {{ .Values.kafka.allowAutoCreate | default false }}
       {{- with .Values.kafka.config }}
