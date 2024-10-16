@@ -1,6 +1,6 @@
 # kafka-strimzi-cluster
 
-![Version: 5.0.2](https://img.shields.io/badge/Version-5.0.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 5.0.2](https://img.shields.io/badge/AppVersion-5.0.2-informational?style=flat-square)
+![Version: 5.1.0](https://img.shields.io/badge/Version-5.1.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 5.1.0](https://img.shields.io/badge/AppVersion-5.1.0-informational?style=flat-square)
 
 A Chart for deployment and testing of a opinionated kafka cluster using strimzi
 
@@ -40,6 +40,7 @@ A Chart for deployment and testing of a opinionated kafka cluster using strimzi
 | kafka.config."socket.send.buffer.bytes" | int | `-1` |  |
 | kafka.config."transaction.state.log.min.isr" | int | `2` |  |
 | kafka.config."transaction.state.log.replication.factor" | int | `3` |  |
+| kafka.jmxOptions | object | `{}` |  |
 | kafka.listeners.internal.plain.enabled | bool | `false` |  |
 | kafka.listeners.internal.tls.authentication.enabled | bool | `true` |  |
 | kafka.listeners.internal.tls.authentication.type | string | `"tls"` |  |
