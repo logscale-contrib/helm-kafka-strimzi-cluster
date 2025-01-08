@@ -116,7 +116,7 @@ spec:
       superUsers:
         - {{ include "kafka-strimzi-cluster.fullname" . }}-kadmin
     {{- end }}
-    {{ with .Values.kafka.clusterRoleBinding }}
-    clusterRoleBinding:
+    {{ with .Values.kafka.template }}
+    template:
     {{- toYaml . | nindent 6 }}
     {{- end }}
