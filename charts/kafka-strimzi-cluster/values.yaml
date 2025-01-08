@@ -29,6 +29,13 @@ nodePools:
       # Must be SSD or NVME like storage IOPs is the primary node constraint
       # class:
   kafka:
+    # Most often used to support argo cd
+    # clusterRoleBinding:
+    #   metadata:
+    #     annotations:
+    #       argocd.argoproj.io/sync-options: Prune=false
+    #       argocd.argoproj.io/compare-options: IgnoreExtraneous
+
     jvmOptions:
       "-Xmx": "5g"
       "-Xms": "5g"
