@@ -39,7 +39,7 @@ jobs:
           check-latest: true
 
       - name: Set up chart-testing
-        uses: helm/chart-testing-action@v2.6.1
+        uses: helm/chart-testing-action@v2.7.0
 
       # - name: inject secrets
       #   run: find charts/kafka-strimzi-cluster/ci/ -type f -name "*.1ptpl" -exec bash -c 'op inject -f -i $1 -o ${1%.*}' bash {} \;
