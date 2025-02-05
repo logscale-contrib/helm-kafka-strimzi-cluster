@@ -107,8 +107,12 @@ spec:
         {{- end }}
         {{- if .Values.kafka.listeners.internal.tls.authentication.enabled }}
         authentication:
-          type: {{ .Values.kafka.listeners.internal.tls.authentication.type }}
+        {{- range $key, $value := .Values.kafka.listeners.internal.tls.authentication }}
+          {{- if ne $key "enabled" }}
+          {{ $key | nindent 6 }}: {{ $value }}
+          {{- end }}
         {{- end }}
+        {{- end }}        
       {{- end }}
     {{- if .Values.kafka.authorization.enabled }}
     authorization:
