@@ -85,7 +85,7 @@ spec:
       valueFrom:
         configMapKeyRef:
           name: {{ include "kafka-strimzi-cluster.fullname" . }}-metrics-config
-          key: metrics.yaml
+          key: metrics-config
     {{- end }}
     listeners:
       {{- if .Values.kafka.listeners.internal.plain.enabled }}
