@@ -4,4 +4,6 @@ metadata:
   name: {{ include "kafka-strimzi-cluster.fullname" . }}-metrics-config
 spec:
   data:
-    metrics-config: {{ toYaml .Values.kafka.metricsConfig.config | indent 4 }}
+    metrics-config: |-
+      #Metrics Config may be empty if so defaults are used
+{{ .Values.kafka.metricsConfig.config | indent 6 }}
