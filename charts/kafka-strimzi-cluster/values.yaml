@@ -91,29 +91,29 @@ nodePools:
                       operator: In
                       values:
                         - linux
-              preferredDuringSchedulingIgnoredDuringExecution:
-                - weight: 100
-                  preference:
-                    matchExpressions:
-                      - key: kubernetes.io/arch
-                        operator: In
-                        values:
-                          - arm64
-          podAffinity:
-            PreferredDuringSchedulingIgnoredDuringExecution:
+            preferredDuringSchedulingIgnoredDuringExecution:
               - weight: 100
-                podAffinityTerm:
-                  labelSelector:
-                    matchExpressions:
-                      # - key: strimzi.io/cluster
-                      #   operator: In
-                      #   values:
-                      #     - NAMEOFCLUSTER
-                      - key: strimzi.io/pool-name
-                        operator: In
-                        values:
-                          - controller
-                  topologyKey: topology.kubernetes.io/zone
+                preference:
+                  matchExpressions:
+                    - key: kubernetes.io/arch
+                      operator: In
+                      values:
+                        - arm64
+          # podAffinity:
+          #   PreferredDuringSchedulingIgnoredDuringExecution:
+          #     - weight: 100
+          #       podAffinityTerm:
+          #         labelSelector:
+          #           matchExpressions:
+          #             # - key: strimzi.io/cluster
+          #             #   operator: In
+          #             #   values:
+          #             #     - NAMEOFCLUSTER
+          #             - key: strimzi.io/pool-name
+          #               operator: In
+          #               values:
+          #                 - controller
+          #         topologyKey: topology.kubernetes.io/zone
           podAntiAffinity:
             requiredDuringSchedulingIgnoredDuringExecution:
               - labelSelector:
@@ -138,7 +138,49 @@ nodePools:
             maxSkew: 1
             topologyKey: topology.kubernetes.io/zone
             whenUnsatisfiable: ScheduleAnyway
-
+entityOperator:
+  template:
+    pod:
+      tolerations: []
+      topologySpreadConstraints: []
+      affinity:
+        # podAffinity:
+        #   PreferredDuringSchedulingIgnoredDuringExecution:
+        #     - weight: 100
+        #       podAffinityTerm:
+        #         labelSelector:
+        #           matchExpressions:
+        #             # - key: strimzi.io/cluster
+        #             #   operator: In
+        #             #   values:
+        #             #     - NAMEOFCLUSTER
+        #             - key: strimzi.io/pool-name
+        #               operator: In
+        #               values:
+        #                 - kafka
+        #         topologyKey: topology.kubernetes.io/zone
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/os
+                    operator: In
+                    values:
+                      - linux
+                  - key: karpenter.k8s.aws/instance-local-nvme
+                    operator: DoesNotExist
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              preference:
+                matchExpressions:
+                  - key: kubernetes.io/arch
+                    operator: In
+                    values:
+                      - arm64
+  topicOperator:
+    resources: {}
+  userOperator:
+    resources: {}
 cruiseControl:
   skipHardGoalCheck: false
   brokerCapacity:
@@ -170,165 +212,44 @@ cruiseControl:
     maxReplicas: 100
     targetCPUUtilizationPercentage: 80
     # targetMemoryUtilizationPercentage: 80
-
-  nodeSelector: {}
-
-  tolerations: []
-  affinity:
-    podAffinity:
-      PreferredDuringSchedulingIgnoredDuringExecution:
-        - weight: 100
-          podAffinityTerm:
-            labelSelector:
-              matchExpressions:
-                # - key: strimzi.io/cluster
-                #   operator: In
-                #   values:
-                #     - NAMEOFCLUSTER
-                - key: strimzi.io/pool-name
-                  operator: In
-                  values:
-                    - kafka
-            topologyKey: topology.kubernetes.io/zone
-    nodeAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        nodeSelectorTerms:
-          - matchExpressions:
-              - key: kubernetes.io/os
-                operator: In
-                values:
-                  - linux
-              - key: karpenter.k8s.aws/instance-local-nvme
-                operator: DoesNotExist
-      preferredDuringSchedulingIgnoredDuringExecution:
-        - weight: 100
-          preference:
-            matchExpressions:
-              - key: kubernetes.io/arch
-                operator: In
-                values:
-                  - arm64
-
-topicOperator:
-  resources:
-    {}
-    # We usually recommend not to specify default resources and to leave this as a conscious
-    # choice for the user. This also increases chances charts run on environments with little
-    # resources, such as Minikube. If you do want to specify resources, uncomment the following
-    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-    # limits:
-    #   cpu: 100m
-    #   memory: 128Mi
-    # requests:
-    #   cpu: 100m
-    #   memory: 128Mi
-
-  autoscaling:
-    enabled: false
-    minReplicas: 1
-    maxReplicas: 100
-    targetCPUUtilizationPercentage: 80
-    # targetMemoryUtilizationPercentage: 80
-
-  nodeSelector: {}
-
-  tolerations: []
-
-  affinity:
-    podAffinity:
-      PreferredDuringSchedulingIgnoredDuringExecution:
-        - weight: 100
-          podAffinityTerm:
-            labelSelector:
-              matchExpressions:
-                # - key: strimzi.io/cluster
-                #   operator: In
-                #   values:
-                #     - NAMEOFCLUSTER
-                - key: strimzi.io/pool-name
-                  operator: In
-                  values:
-                    - kafka
-            topologyKey: topology.kubernetes.io/zone
-    nodeAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        nodeSelectorTerms:
-          - matchExpressions:
-              - key: kubernetes.io/os
-                operator: In
-                values:
-                  - linux
-              - key: karpenter.k8s.aws/instance-local-nvme
-                operator: DoesNotExist
-      preferredDuringSchedulingIgnoredDuringExecution:
-        - weight: 100
-          preference:
-            matchExpressions:
-              - key: kubernetes.io/arch
-                operator: In
-                values:
-                  - arm64
-
-userOperator:
-  resources:
-    {}
-    # We usually recommend not to specify default resources and to leave this as a conscious
-    # choice for the user. This also increases chances charts run on environments with little
-    # resources, such as Minikube. If you do want to specify resources, uncomment the following
-    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-    # limits:
-    #   cpu: 100m
-    #   memory: 128Mi
-    # requests:
-    #   cpu: 100m
-    #   memory: 128Mi
-
-  autoscaling:
-    enabled: false
-    minReplicas: 1
-    maxReplicas: 100
-    targetCPUUtilizationPercentage: 80
-    # targetMemoryUtilizationPercentage: 80
-
-  nodeSelector: {}
-
-  tolerations: []
-
-  affinity:
-    podAffinity:
-      PreferredDuringSchedulingIgnoredDuringExecution:
-        - weight: 100
-          podAffinityTerm:
-            labelSelector:
-              matchExpressions:
-                - key: strimzi.io/cluster
-                  operator: In
-                  values:
-                    - ${kafka_name}
-                - key: strimzi.io/pool-name
-                  operator: In
-                  values:
-                    - kafka
-            topologyKey: topology.kubernetes.io/zone
-    nodeAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        nodeSelectorTerms:
-          - matchExpressions:
-              - key: kubernetes.io/os
-                operator: In
-                values:
-                  - linux
-              - key: karpenter.k8s.aws/instance-local-nvme
-                operator: DoesNotExist
-      preferredDuringSchedulingIgnoredDuringExecution:
-        - weight: 100
-          preference:
-            matchExpressions:
-              - key: kubernetes.io/arch
-                operator: In
-                values:
-                  - arm64
-
+  template:
+    pod:
+      tolerations: []
+      topologySpreadConstraints: []
+      affinity:
+        # podAffinity:
+        #   PreferredDuringSchedulingIgnoredDuringExecution:
+        #     - weight: 100
+        #       podAffinityTerm:
+        #         labelSelector:
+        #           matchExpressions:
+        #             # - key: strimzi.io/cluster
+        #             #   operator: In
+        #             #   values:
+        #             #     - NAMEOFCLUSTER
+        #             - key: strimzi.io/pool-name
+        #               operator: In
+        #               values:
+        #                 - kafka
+        #         topologyKey: topology.kubernetes.io/zone
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/os
+                    operator: In
+                    values:
+                      - linux
+                  - key: karpenter.k8s.aws/instance-local-nvme
+                    operator: DoesNotExist
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              preference:
+                matchExpressions:
+                  - key: kubernetes.io/arch
+                    operator: In
+                    values:
+                      - arm64
 kafka:
   # Most often used to support argo cd
   # template:

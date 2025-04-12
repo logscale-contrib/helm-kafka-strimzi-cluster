@@ -19,51 +19,43 @@ spec:
     {{- end }}
     template:
       pod:
-        {{- with .Values.cruiseControl.affinity }}
+        {{- with .Values.cruiseControl.template.pod.affinity }}
         affinity:
           {{- toYaml . | nindent 10 }}
         {{- end }}
-        {{- with .Values.cruiseControl.tolerations }}
+        {{- with .Values.cruiseControl.template.pod.tolerations }}
         tolerations:
           {{- toYaml . | nindent 10 }}
         {{- end }}
-        {{- with .Values.cruiseControl.topologySpreadConstraints }}
+        {{- with .Values.cruiseControl.template.pod.topologySpreadConstraints }}
         topologySpreadConstraints:
           {{- toYaml . | nindent 10 }}
         {{- end }}
     resources:
       {{- toYaml .Values.cruiseControl.resources | nindent 6 }}
   entityOperator:
+    template:
+      pod:
+        {{- with .Values.entityOperator.template.pod.affinity }}
+        affinity:
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
+        {{- with .Values.entityOperator.template.pod.tolerations }}
+        tolerations:
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
+        {{- with .Values.entityOperator.template.pod.topologySpreadConstraints }}
+        topologySpreadConstraints:
+          {{- toYaml . | nindent 10 }}
+        {{- end }}    
+      {{ with .Values.entityOperator.topicOperator }}      
     topicOperator:
-      {{- with .Values.topicOperator.affinity }}
-      affinity:
-        {{- toYaml . | nindent 12 }}
-      {{- end }}
-      {{- with .Values.topicOperator.tolerations }}
-      tolerations:
-        {{- toYaml . | nindent 12 }}
-      {{- end }}
-      {{- with .Values.topicOperator.topologySpreadConstraints }}
-      topologySpreadConstraints:
-        {{- toYaml . | nindent 12 }}
-      {{- end }}
-      resources:
-        {{- toYaml .Values.topicOperator.resources | nindent 8 }}
+      {{- toYaml . | nindent 6 }}
+    {{- end }}    
+    {{ with .Values.entityOperator.userOperator }}      
     userOperator:
-      {{- with .Values.userOperator.affinity }}
-      affinity:
-        {{- toYaml . | nindent 12 }}
-      {{- end }}
-      {{- with .Values.userOperator.tolerations }}
-      tolerations:
-        {{- toYaml . | nindent 12 }}
-      {{- end }}
-      {{- with .Values.userOperator.topologySpreadConstraints }}
-      topologySpreadConstraints:
-        {{- toYaml . | nindent 12 }}
-      {{- end }}
-      resources:
-        {{- toYaml .Values.userOperator.resources | nindent 8 }}
+      {{- toYaml . | nindent 6 }}
+    {{- end }}    
   kafka:
     {{ with .Values.kafka.jmxOptions }}
     jmxOptions: 
