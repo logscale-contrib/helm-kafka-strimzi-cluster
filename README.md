@@ -1,6 +1,6 @@
 # kafka-strimzi-cluster
 
-![Version: 6.0.3](https://img.shields.io/badge/Version-6.0.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 6.0.3](https://img.shields.io/badge/AppVersion-6.0.3-informational?style=flat-square)
+![Version: 6.0.4](https://img.shields.io/badge/Version-6.0.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 6.0.4](https://img.shields.io/badge/AppVersion-6.0.4-informational?style=flat-square)
 
 A Chart for deployment and testing of a opinionated kafka cluster using strimzi
 
@@ -61,7 +61,7 @@ A Chart for deployment and testing of a opinionated kafka cluster using strimzi
 | kafka.listeners.internal.tls.certManager.issuerRef.kind | string | `"ClusterIssuer"` |  |
 | kafka.listeners.internal.tls.certManager.issuerRef.name | string | `nil` |  |
 | kafka.listeners.internal.tls.enabled | bool | `true` |  |
-| kafka.metricsConfig.config | string | `""` |  |
+| kafka.metricsConfig.config | object | `{}` |  |
 | kafka.metricsConfig.enabled | bool | `true` |  |
 | kafka.rack.enabled | bool | `true` |  |
 | kafka.rack.topologyKey | string | `"topology.kubernetes.io/zone"` |  |
