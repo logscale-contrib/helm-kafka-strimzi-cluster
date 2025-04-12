@@ -38,15 +38,15 @@ spec:
       pod:
         {{- with .Values.entityOperator.template.pod.affinity }}
         affinity:
-          {{- toYaml . | nindent 8 }}
+          {{- toYaml . | nindent 10 }}
         {{- end }}
         {{- with .Values.entityOperator.template.pod.tolerations }}
         tolerations:
-          {{- toYaml . | nindent 8 }}
+          {{- toYaml . | nindent 10 }}
         {{- end }}
         {{- with .Values.entityOperator.template.pod.topologySpreadConstraints }}
         topologySpreadConstraints:
-          {{- toYaml . | nindent 8 }}
+          {{- toYaml . | nindent 10 }}
         {{- end }}    
       {{ with .Values.entityOperator.topicOperator }}      
     topicOperator:
