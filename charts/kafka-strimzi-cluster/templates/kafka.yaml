@@ -34,20 +34,21 @@ spec:
     resources:
       {{- toYaml .Values.cruiseControl.resources | nindent 6 }}
   entityOperator:
-    pod:
-      {{- with .Values.entityOperator.pod.affinity }}
-      affinity:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.entityOperator.pod.tolerations }}
-      tolerations:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.entityOperator.pod.topologySpreadConstraints }}
-      topologySpreadConstraints:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}    
-    {{ with .Values.entityOperator.topicOperator }}      
+    template:
+      pod:
+        {{- with .Values.entityOperator.template.pod.affinity }}
+        affinity:
+          {{- toYaml . | nindent 8 }}
+        {{- end }}
+        {{- with .Values.entityOperator.template.pod.tolerations }}
+        tolerations:
+          {{- toYaml . | nindent 8 }}
+        {{- end }}
+        {{- with .Values.entityOperator.template.pod.topologySpreadConstraints }}
+        topologySpreadConstraints:
+          {{- toYaml . | nindent 8 }}
+        {{- end }}    
+      {{ with .Values.entityOperator.topicOperator }}      
     topicOperator:
       {{- toYaml . | nindent 6 }}
     {{- end }}    
