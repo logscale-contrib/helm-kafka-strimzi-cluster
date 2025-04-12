@@ -28,9 +28,50 @@ nodePools:
       # deleteClaim: true
       # Must be SSD or NVME like storage IOPs is the primary node constraint
       # class:
+    template:
+      pod:
+        affinity:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+                - matchExpressions:
+                    - key: kubernetes.io/os
+                      operator: In
+                      values:
+                        - linux
+            preferredDuringSchedulingIgnoredDuringExecution:
+              - weight: 100
+                preference:
+                  matchExpressions:
+                    - key: kubernetes.io/arch
+                      operator: In
+                      values:
+                        - arm64
+          podAntiAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              - labelSelector:
+                  matchExpressions:
+                    # - key: strimzi.io/cluster
+                    #   operator: In
+                    #   values:
+                    #     - NAMEOFCLUSTER
+                    - key: strimzi.io/pool-name
+                      operator: In
+                      values:
+                        - kafka
+                        - controller
+                topologyKey: kubernetes.io/hostname
+        topologySpreadConstraints:
+          - labelSelector:
+              matchLabels:
+                # strimzi.io/cluster: NAMEOFCLUSTER
+                strimzi.io/pool-name: kafka
+            matchLabelKeys:
+              - pod-template-hash
+            maxSkew: 1
+            topologyKey: topology.kubernetes.io/zone
+            whenUnsatisfiable: ScheduleAnyway
   kafka:
-
-
     jvmOptions:
       "-Xmx": "5g"
       "-Xms": "5g"
@@ -40,7 +81,63 @@ nodePools:
         "InitiatingHeapOccupancyPercent": "35"
         "ExplicitGCInvokesConcurrent": "true"
     template:
-      pod: {}
+      pod:
+        affinity:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+                - matchExpressions:
+                    - key: kubernetes.io/os
+                      operator: In
+                      values:
+                        - linux
+              preferredDuringSchedulingIgnoredDuringExecution:
+                - weight: 100
+                  preference:
+                    matchExpressions:
+                      - key: kubernetes.io/arch
+                        operator: In
+                        values:
+                          - arm64
+          podAffinity:
+            PreferredDuringSchedulingIgnoredDuringExecution:
+              - weight: 100
+                podAffinityTerm:
+                  labelSelector:
+                    matchExpressions:
+                      # - key: strimzi.io/cluster
+                      #   operator: In
+                      #   values:
+                      #     - NAMEOFCLUSTER
+                      - key: strimzi.io/pool-name
+                        operator: In
+                        values:
+                          - controller
+                  topologyKey: topology.kubernetes.io/zone
+          podAntiAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              - labelSelector:
+                  matchExpressions:
+                    # - key: strimzi.io/cluster
+                    #   operator: In
+                    #   values:
+                    #     - NAMEOFCLUSTER
+                    - key: strimzi.io/pool-name
+                      operator: In
+                      values:
+                        - controller
+                        - broker
+                topologyKey: kubernetes.io/hostname
+        topologySpreadConstraints:
+          - labelSelector:
+              matchLabels:
+                # strimzi.io/cluster: NAMEOFCLUSTER
+                strimzi.io/pool-name: controller
+            matchLabelKeys:
+              - pod-template-hash
+            maxSkew: 1
+            topologyKey: topology.kubernetes.io/zone
+            whenUnsatisfiable: ScheduleAnyway
 
 cruiseControl:
   skipHardGoalCheck: false
@@ -77,8 +174,40 @@ cruiseControl:
   nodeSelector: {}
 
   tolerations: []
-
-  affinity: {}
+  affinity:
+    podAffinity:
+      PreferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 100
+          podAffinityTerm:
+            labelSelector:
+              matchExpressions:
+                # - key: strimzi.io/cluster
+                #   operator: In
+                #   values:
+                #     - NAMEOFCLUSTER
+                - key: strimzi.io/pool-name
+                  operator: In
+                  values:
+                    - kafka
+            topologyKey: topology.kubernetes.io/zone
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: kubernetes.io/os
+                operator: In
+                values:
+                  - linux
+              - key: karpenter.k8s.aws/instance-local-nvme
+                operator: DoesNotExist
+      preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 100
+          preference:
+            matchExpressions:
+              - key: kubernetes.io/arch
+                operator: In
+                values:
+                  - arm64
 
 topicOperator:
   resources:
@@ -105,7 +234,40 @@ topicOperator:
 
   tolerations: []
 
-  affinity: {}
+  affinity:
+    podAffinity:
+      PreferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 100
+          podAffinityTerm:
+            labelSelector:
+              matchExpressions:
+                # - key: strimzi.io/cluster
+                #   operator: In
+                #   values:
+                #     - NAMEOFCLUSTER
+                - key: strimzi.io/pool-name
+                  operator: In
+                  values:
+                    - kafka
+            topologyKey: topology.kubernetes.io/zone
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: kubernetes.io/os
+                operator: In
+                values:
+                  - linux
+              - key: karpenter.k8s.aws/instance-local-nvme
+                operator: DoesNotExist
+      preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 100
+          preference:
+            matchExpressions:
+              - key: kubernetes.io/arch
+                operator: In
+                values:
+                  - arm64
 
 userOperator:
   resources:
@@ -132,16 +294,49 @@ userOperator:
 
   tolerations: []
 
-  affinity: {}
+  affinity:
+    podAffinity:
+      PreferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 100
+          podAffinityTerm:
+            labelSelector:
+              matchExpressions:
+                - key: strimzi.io/cluster
+                  operator: In
+                  values:
+                    - ${kafka_name}
+                - key: strimzi.io/pool-name
+                  operator: In
+                  values:
+                    - kafka
+            topologyKey: topology.kubernetes.io/zone
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: kubernetes.io/os
+                operator: In
+                values:
+                  - linux
+              - key: karpenter.k8s.aws/instance-local-nvme
+                operator: DoesNotExist
+      preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 100
+          preference:
+            matchExpressions:
+              - key: kubernetes.io/arch
+                operator: In
+                values:
+                  - arm64
 
 kafka:
-    # Most often used to support argo cd
-    # template:
-    #   clusterRoleBinding:
-    #     metadata:
-    #       annotations:
-    #         argocd.argoproj.io/sync-options: Prune=false
-    #         argocd.argoproj.io/compare-options: IgnoreExtraneous
+  # Most often used to support argo cd
+  # template:
+  #   clusterRoleBinding:
+  #     metadata:
+  #       annotations:
+  #         argocd.argoproj.io/sync-options: Prune=false
+  #         argocd.argoproj.io/compare-options: IgnoreExtraneous
   jmxOptions: {}
   config:
     min.insync.replicas: 2
@@ -171,7 +366,7 @@ kafka:
     # socket.request.max.bytes: 104857600 default setting to 100MB probably should not change
     # socket.send.buffer.bytes: 102400 default setting to -1 to use OS default
     socket.send.buffer.bytes: -1
-
+  metricsConfig: ""
   rack:
     enabled: true
     topologyKey: topology.kubernetes.io/zone
@@ -189,7 +384,8 @@ kafka:
         # secretName:
         authentication:
           enabled: true
-          type: tls
+          type: scram-sha-512
+
   authorization:
     enabled: true
     type: simple

@@ -109,7 +109,7 @@ spec:
         authentication:
         {{- range $key, $value := .Values.kafka.listeners.internal.tls.authentication }}
           {{- if ne $key "enabled" }}
-          {{ $key | nindent 6 }}: {{ $value }}
+          {{ $key | nindent 10 }}: {{ $value }}
           {{- end }}
         {{- end }}
         {{- end }}        
