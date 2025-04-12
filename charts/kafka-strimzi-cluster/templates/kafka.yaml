@@ -52,7 +52,7 @@ spec:
       {{- toYaml . | nindent 6 }}
     {{- end }}    
     {{ with .Values.entityOperator.userOperator }}      
-    topicOperator:
+    userOperator:
       {{- toYaml . | nindent 6 }}
     {{- end }}    
   kafka:
