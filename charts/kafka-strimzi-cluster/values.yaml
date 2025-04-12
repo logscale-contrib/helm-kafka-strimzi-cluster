@@ -366,7 +366,10 @@ kafka:
     # socket.request.max.bytes: 104857600 default setting to 100MB probably should not change
     # socket.send.buffer.bytes: 102400 default setting to -1 to use OS default
     socket.send.buffer.bytes: -1
-  metricsConfig: ""
+  metricsConfig:
+    enabled: true
+    config: |
+      # Intentionally Left Blank to enable default config
   rack:
     enabled: true
     topologyKey: topology.kubernetes.io/zone

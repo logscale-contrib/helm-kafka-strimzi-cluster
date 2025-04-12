@@ -79,6 +79,14 @@ spec:
     rack:
       topologyKey: {{ .Values.kafka.rack.topologyKey }}
     {{- end }}
+    {{- if .Values.kafka.metricsConfig.enabled }}
+    metricsConfig:
+      type: {{ .Values.kafka.metricsConfig.type | default "jmxPrometheusExporter" }}
+      valueFrom:
+        configMapKeyRef:
+          name: {{ include "kafka-strimzi-cluster.fullname" . }}-metrics-config
+          key: metrics.yaml
+    {{- end }}
     listeners:
       {{- if .Values.kafka.listeners.internal.plain.enabled }}
       - name: plain
