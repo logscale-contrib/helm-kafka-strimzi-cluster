@@ -368,7 +368,7 @@ kafka:
     socket.send.buffer.bytes: -1
   metricsConfig:
     enabled: true
-    config: "" # empty config will use default config
+    config: {}
   rack:
     enabled: true
     topologyKey: topology.kubernetes.io/zone
