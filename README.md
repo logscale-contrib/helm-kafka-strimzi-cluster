@@ -1,6 +1,6 @@
 # kafka-strimzi-cluster
 
-![Version: 6.0.5-next.4](https://img.shields.io/badge/Version-6.0.5--next.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 6.0.5-next.4](https://img.shields.io/badge/AppVersion-6.0.5--next.4-informational?style=flat-square)
+![Version: 6.0.5-next.5](https://img.shields.io/badge/Version-6.0.5--next.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 6.0.5-next.5](https://img.shields.io/badge/AppVersion-6.0.5--next.5-informational?style=flat-square)
 
 A Chart for deployment and testing of a opinionated kafka cluster using strimzi
 
@@ -106,13 +106,13 @@ A Chart for deployment and testing of a opinionated kafka cluster using strimzi
 | nodePools.kafka.jvmOptions.-XX.UseG1GC | string | `"true"` |  |
 | nodePools.kafka.jvmOptions.-Xms | string | `"5g"` |  |
 | nodePools.kafka.jvmOptions.-Xmx | string | `"5g"` |  |
+| nodePools.kafka.template.pod.affinity.nodeAffinity.preferredDuringSchedulingIgnoredDuringExecution[0].preference.matchExpressions[0].key | string | `"kubernetes.io/arch"` |  |
+| nodePools.kafka.template.pod.affinity.nodeAffinity.preferredDuringSchedulingIgnoredDuringExecution[0].preference.matchExpressions[0].operator | string | `"In"` |  |
+| nodePools.kafka.template.pod.affinity.nodeAffinity.preferredDuringSchedulingIgnoredDuringExecution[0].preference.matchExpressions[0].values[0] | string | `"arm64"` |  |
+| nodePools.kafka.template.pod.affinity.nodeAffinity.preferredDuringSchedulingIgnoredDuringExecution[0].weight | int | `100` |  |
 | nodePools.kafka.template.pod.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms[0].matchExpressions[0].key | string | `"kubernetes.io/os"` |  |
 | nodePools.kafka.template.pod.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms[0].matchExpressions[0].operator | string | `"In"` |  |
 | nodePools.kafka.template.pod.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms[0].matchExpressions[0].values[0] | string | `"linux"` |  |
-| nodePools.kafka.template.pod.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.preferredDuringSchedulingIgnoredDuringExecution[0].preference.matchExpressions[0].key | string | `"kubernetes.io/arch"` |  |
-| nodePools.kafka.template.pod.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.preferredDuringSchedulingIgnoredDuringExecution[0].preference.matchExpressions[0].operator | string | `"In"` |  |
-| nodePools.kafka.template.pod.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.preferredDuringSchedulingIgnoredDuringExecution[0].preference.matchExpressions[0].values[0] | string | `"arm64"` |  |
-| nodePools.kafka.template.pod.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.preferredDuringSchedulingIgnoredDuringExecution[0].weight | int | `100` |  |
 | nodePools.kafka.template.pod.affinity.podAntiAffinity.requiredDuringSchedulingIgnoredDuringExecution[0].labelSelector.matchExpressions[0].key | string | `"strimzi.io/pool-name"` |  |
 | nodePools.kafka.template.pod.affinity.podAntiAffinity.requiredDuringSchedulingIgnoredDuringExecution[0].labelSelector.matchExpressions[0].operator | string | `"In"` |  |
 | nodePools.kafka.template.pod.affinity.podAntiAffinity.requiredDuringSchedulingIgnoredDuringExecution[0].labelSelector.matchExpressions[0].values[0] | string | `"controller"` |  |
