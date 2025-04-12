@@ -19,15 +19,15 @@ spec:
     {{- end }}
     template:
       pod:
-        {{- with .Values.cruiseControl.affinity }}
+        {{- with .Values.cruiseControl.template.pod.affinity }}
         affinity:
           {{- toYaml . | nindent 10 }}
         {{- end }}
-        {{- with .Values.cruiseControl.tolerations }}
+        {{- with .Values.cruiseControl.template.pod.tolerations }}
         tolerations:
           {{- toYaml . | nindent 10 }}
         {{- end }}
-        {{- with .Values.cruiseControl.topologySpreadConstraints }}
+        {{- with .Values.cruiseControl.template.pod.topologySpreadConstraints }}
         topologySpreadConstraints:
           {{- toYaml . | nindent 10 }}
         {{- end }}
