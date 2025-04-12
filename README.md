@@ -1,6 +1,6 @@
 # kafka-strimzi-cluster
 
-![Version: 6.0.5-next.1](https://img.shields.io/badge/Version-6.0.5--next.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 6.0.5-next.1](https://img.shields.io/badge/AppVersion-6.0.5--next.1-informational?style=flat-square)
+![Version: 6.0.5-next.2](https://img.shields.io/badge/Version-6.0.5--next.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 6.0.5-next.2](https://img.shields.io/badge/AppVersion-6.0.5--next.2-informational?style=flat-square)
 
 A Chart for deployment and testing of a opinionated kafka cluster using strimzi
 
@@ -28,6 +28,22 @@ A Chart for deployment and testing of a opinionated kafka cluster using strimzi
 | cruiseControl.goals[5] | string | `"ReplicaCapacityGoal"` |  |
 | cruiseControl.resources | object | `{}` |  |
 | cruiseControl.skipHardGoalCheck | bool | `false` |  |
+| cruiseControl.template.pod.affinity.nodeAffinity.preferredDuringSchedulingIgnoredDuringExecution[0].preference.matchExpressions[0].key | string | `"kubernetes.io/arch"` |  |
+| cruiseControl.template.pod.affinity.nodeAffinity.preferredDuringSchedulingIgnoredDuringExecution[0].preference.matchExpressions[0].operator | string | `"In"` |  |
+| cruiseControl.template.pod.affinity.nodeAffinity.preferredDuringSchedulingIgnoredDuringExecution[0].preference.matchExpressions[0].values[0] | string | `"arm64"` |  |
+| cruiseControl.template.pod.affinity.nodeAffinity.preferredDuringSchedulingIgnoredDuringExecution[0].weight | int | `100` |  |
+| cruiseControl.template.pod.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms[0].matchExpressions[0].key | string | `"kubernetes.io/os"` |  |
+| cruiseControl.template.pod.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms[0].matchExpressions[0].operator | string | `"In"` |  |
+| cruiseControl.template.pod.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms[0].matchExpressions[0].values[0] | string | `"linux"` |  |
+| cruiseControl.template.pod.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms[0].matchExpressions[1].key | string | `"karpenter.k8s.aws/instance-local-nvme"` |  |
+| cruiseControl.template.pod.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms[0].matchExpressions[1].operator | string | `"DoesNotExist"` |  |
+| cruiseControl.template.pod.affinity.podAffinity.PreferredDuringSchedulingIgnoredDuringExecution[0].podAffinityTerm.labelSelector.matchExpressions[0].key | string | `"strimzi.io/pool-name"` |  |
+| cruiseControl.template.pod.affinity.podAffinity.PreferredDuringSchedulingIgnoredDuringExecution[0].podAffinityTerm.labelSelector.matchExpressions[0].operator | string | `"In"` |  |
+| cruiseControl.template.pod.affinity.podAffinity.PreferredDuringSchedulingIgnoredDuringExecution[0].podAffinityTerm.labelSelector.matchExpressions[0].values[0] | string | `"kafka"` |  |
+| cruiseControl.template.pod.affinity.podAffinity.PreferredDuringSchedulingIgnoredDuringExecution[0].podAffinityTerm.topologyKey | string | `"topology.kubernetes.io/zone"` |  |
+| cruiseControl.template.pod.affinity.podAffinity.PreferredDuringSchedulingIgnoredDuringExecution[0].weight | int | `100` |  |
+| cruiseControl.template.pod.tolerations | list | `[]` |  |
+| cruiseControl.template.pod.topologySpreadConstraints | list | `[]` |  |
 | entityOperator.pod.affinity.nodeAffinity.preferredDuringSchedulingIgnoredDuringExecution[0].preference.matchExpressions[0].key | string | `"kubernetes.io/arch"` |  |
 | entityOperator.pod.affinity.nodeAffinity.preferredDuringSchedulingIgnoredDuringExecution[0].preference.matchExpressions[0].operator | string | `"In"` |  |
 | entityOperator.pod.affinity.nodeAffinity.preferredDuringSchedulingIgnoredDuringExecution[0].preference.matchExpressions[0].values[0] | string | `"arm64"` |  |
