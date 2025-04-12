@@ -99,21 +99,21 @@ nodePools:
                         operator: In
                         values:
                           - arm64
-          podAffinity:
-            PreferredDuringSchedulingIgnoredDuringExecution:
-              - weight: 100
-                podAffinityTerm:
-                  labelSelector:
-                    matchExpressions:
-                      # - key: strimzi.io/cluster
-                      #   operator: In
-                      #   values:
-                      #     - NAMEOFCLUSTER
-                      - key: strimzi.io/pool-name
-                        operator: In
-                        values:
-                          - controller
-                  topologyKey: topology.kubernetes.io/zone
+          # podAffinity:
+          #   PreferredDuringSchedulingIgnoredDuringExecution:
+          #     - weight: 100
+          #       podAffinityTerm:
+          #         labelSelector:
+          #           matchExpressions:
+          #             # - key: strimzi.io/cluster
+          #             #   operator: In
+          #             #   values:
+          #             #     - NAMEOFCLUSTER
+          #             - key: strimzi.io/pool-name
+          #               operator: In
+          #               values:
+          #                 - controller
+          #         topologyKey: topology.kubernetes.io/zone
           podAntiAffinity:
             requiredDuringSchedulingIgnoredDuringExecution:
               - labelSelector:
@@ -144,21 +144,21 @@ entityOperator:
       tolerations: []
       topologySpreadConstraints: []
       affinity:
-        podAffinity:
-          PreferredDuringSchedulingIgnoredDuringExecution:
-            - weight: 100
-              podAffinityTerm:
-                labelSelector:
-                  matchExpressions:
-                    # - key: strimzi.io/cluster
-                    #   operator: In
-                    #   values:
-                    #     - NAMEOFCLUSTER
-                    - key: strimzi.io/pool-name
-                      operator: In
-                      values:
-                        - kafka
-                topologyKey: topology.kubernetes.io/zone
+        # podAffinity:
+        #   PreferredDuringSchedulingIgnoredDuringExecution:
+        #     - weight: 100
+        #       podAffinityTerm:
+        #         labelSelector:
+        #           matchExpressions:
+        #             # - key: strimzi.io/cluster
+        #             #   operator: In
+        #             #   values:
+        #             #     - NAMEOFCLUSTER
+        #             - key: strimzi.io/pool-name
+        #               operator: In
+        #               values:
+        #                 - kafka
+        #         topologyKey: topology.kubernetes.io/zone
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
@@ -217,21 +217,21 @@ cruiseControl:
       tolerations: []
       topologySpreadConstraints: []
       affinity:
-        podAffinity:
-          PreferredDuringSchedulingIgnoredDuringExecution:
-            - weight: 100
-              podAffinityTerm:
-                labelSelector:
-                  matchExpressions:
-                    # - key: strimzi.io/cluster
-                    #   operator: In
-                    #   values:
-                    #     - NAMEOFCLUSTER
-                    - key: strimzi.io/pool-name
-                      operator: In
-                      values:
-                        - kafka
-                topologyKey: topology.kubernetes.io/zone
+        # podAffinity:
+        #   PreferredDuringSchedulingIgnoredDuringExecution:
+        #     - weight: 100
+        #       podAffinityTerm:
+        #         labelSelector:
+        #           matchExpressions:
+        #             # - key: strimzi.io/cluster
+        #             #   operator: In
+        #             #   values:
+        #             #     - NAMEOFCLUSTER
+        #             - key: strimzi.io/pool-name
+        #               operator: In
+        #               values:
+        #                 - kafka
+        #         topologyKey: topology.kubernetes.io/zone
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
