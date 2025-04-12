@@ -139,43 +139,44 @@ nodePools:
             topologyKey: topology.kubernetes.io/zone
             whenUnsatisfiable: ScheduleAnyway
 entityOperator:
-  pod:
-    tolerations: []
-    topologySpreadConstraints: []
-    affinity:
-      podAffinity:
-        PreferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 100
-            podAffinityTerm:
-              labelSelector:
-                matchExpressions:
-                  # - key: strimzi.io/cluster
-                  #   operator: In
-                  #   values:
-                  #     - NAMEOFCLUSTER
-                  - key: strimzi.io/pool-name
+  template:
+    pod:
+      tolerations: []
+      topologySpreadConstraints: []
+      affinity:
+        podAffinity:
+          PreferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    # - key: strimzi.io/cluster
+                    #   operator: In
+                    #   values:
+                    #     - NAMEOFCLUSTER
+                    - key: strimzi.io/pool-name
+                      operator: In
+                      values:
+                        - kafka
+                topologyKey: topology.kubernetes.io/zone
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/os
                     operator: In
                     values:
-                      - kafka
-              topologyKey: topology.kubernetes.io/zone
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-            - matchExpressions:
-                - key: kubernetes.io/os
-                  operator: In
-                  values:
-                    - linux
-                - key: karpenter.k8s.aws/instance-local-nvme
-                  operator: DoesNotExist
-        preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 100
-            preference:
-              matchExpressions:
-                - key: kubernetes.io/arch
-                  operator: In
-                  values:
-                    - arm64
+                      - linux
+                  - key: karpenter.k8s.aws/instance-local-nvme
+                    operator: DoesNotExist
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              preference:
+                matchExpressions:
+                  - key: kubernetes.io/arch
+                    operator: In
+                    values:
+                      - arm64
   topicOperator:
     resources: {}
   userOperator:
