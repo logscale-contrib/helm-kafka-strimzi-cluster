@@ -1,6 +1,6 @@
 # kafka-strimzi-cluster
 
-![Version: 6.0.5-next.3](https://img.shields.io/badge/Version-6.0.5--next.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 6.0.5-next.3](https://img.shields.io/badge/AppVersion-6.0.5--next.3-informational?style=flat-square)
+![Version: 6.0.5-next.4](https://img.shields.io/badge/Version-6.0.5--next.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 6.0.5-next.4](https://img.shields.io/badge/AppVersion-6.0.5--next.4-informational?style=flat-square)
 
 A Chart for deployment and testing of a opinionated kafka cluster using strimzi
 
@@ -37,11 +37,6 @@ A Chart for deployment and testing of a opinionated kafka cluster using strimzi
 | cruiseControl.template.pod.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms[0].matchExpressions[0].values[0] | string | `"linux"` |  |
 | cruiseControl.template.pod.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms[0].matchExpressions[1].key | string | `"karpenter.k8s.aws/instance-local-nvme"` |  |
 | cruiseControl.template.pod.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms[0].matchExpressions[1].operator | string | `"DoesNotExist"` |  |
-| cruiseControl.template.pod.affinity.podAffinity.PreferredDuringSchedulingIgnoredDuringExecution[0].podAffinityTerm.labelSelector.matchExpressions[0].key | string | `"strimzi.io/pool-name"` |  |
-| cruiseControl.template.pod.affinity.podAffinity.PreferredDuringSchedulingIgnoredDuringExecution[0].podAffinityTerm.labelSelector.matchExpressions[0].operator | string | `"In"` |  |
-| cruiseControl.template.pod.affinity.podAffinity.PreferredDuringSchedulingIgnoredDuringExecution[0].podAffinityTerm.labelSelector.matchExpressions[0].values[0] | string | `"kafka"` |  |
-| cruiseControl.template.pod.affinity.podAffinity.PreferredDuringSchedulingIgnoredDuringExecution[0].podAffinityTerm.topologyKey | string | `"topology.kubernetes.io/zone"` |  |
-| cruiseControl.template.pod.affinity.podAffinity.PreferredDuringSchedulingIgnoredDuringExecution[0].weight | int | `100` |  |
 | cruiseControl.template.pod.tolerations | list | `[]` |  |
 | cruiseControl.template.pod.topologySpreadConstraints | list | `[]` |  |
 | entityOperator.template.pod.affinity.nodeAffinity.preferredDuringSchedulingIgnoredDuringExecution[0].preference.matchExpressions[0].key | string | `"kubernetes.io/arch"` |  |
@@ -53,11 +48,6 @@ A Chart for deployment and testing of a opinionated kafka cluster using strimzi
 | entityOperator.template.pod.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms[0].matchExpressions[0].values[0] | string | `"linux"` |  |
 | entityOperator.template.pod.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms[0].matchExpressions[1].key | string | `"karpenter.k8s.aws/instance-local-nvme"` |  |
 | entityOperator.template.pod.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms[0].matchExpressions[1].operator | string | `"DoesNotExist"` |  |
-| entityOperator.template.pod.affinity.podAffinity.PreferredDuringSchedulingIgnoredDuringExecution[0].podAffinityTerm.labelSelector.matchExpressions[0].key | string | `"strimzi.io/pool-name"` |  |
-| entityOperator.template.pod.affinity.podAffinity.PreferredDuringSchedulingIgnoredDuringExecution[0].podAffinityTerm.labelSelector.matchExpressions[0].operator | string | `"In"` |  |
-| entityOperator.template.pod.affinity.podAffinity.PreferredDuringSchedulingIgnoredDuringExecution[0].podAffinityTerm.labelSelector.matchExpressions[0].values[0] | string | `"kafka"` |  |
-| entityOperator.template.pod.affinity.podAffinity.PreferredDuringSchedulingIgnoredDuringExecution[0].podAffinityTerm.topologyKey | string | `"topology.kubernetes.io/zone"` |  |
-| entityOperator.template.pod.affinity.podAffinity.PreferredDuringSchedulingIgnoredDuringExecution[0].weight | int | `100` |  |
 | entityOperator.template.pod.tolerations | list | `[]` |  |
 | entityOperator.template.pod.topologySpreadConstraints | list | `[]` |  |
 | entityOperator.topicOperator.resources | object | `{}` |  |
@@ -123,11 +113,6 @@ A Chart for deployment and testing of a opinionated kafka cluster using strimzi
 | nodePools.kafka.template.pod.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.preferredDuringSchedulingIgnoredDuringExecution[0].preference.matchExpressions[0].operator | string | `"In"` |  |
 | nodePools.kafka.template.pod.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.preferredDuringSchedulingIgnoredDuringExecution[0].preference.matchExpressions[0].values[0] | string | `"arm64"` |  |
 | nodePools.kafka.template.pod.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.preferredDuringSchedulingIgnoredDuringExecution[0].weight | int | `100` |  |
-| nodePools.kafka.template.pod.affinity.podAffinity.PreferredDuringSchedulingIgnoredDuringExecution[0].podAffinityTerm.labelSelector.matchExpressions[0].key | string | `"strimzi.io/pool-name"` |  |
-| nodePools.kafka.template.pod.affinity.podAffinity.PreferredDuringSchedulingIgnoredDuringExecution[0].podAffinityTerm.labelSelector.matchExpressions[0].operator | string | `"In"` |  |
-| nodePools.kafka.template.pod.affinity.podAffinity.PreferredDuringSchedulingIgnoredDuringExecution[0].podAffinityTerm.labelSelector.matchExpressions[0].values[0] | string | `"controller"` |  |
-| nodePools.kafka.template.pod.affinity.podAffinity.PreferredDuringSchedulingIgnoredDuringExecution[0].podAffinityTerm.topologyKey | string | `"topology.kubernetes.io/zone"` |  |
-| nodePools.kafka.template.pod.affinity.podAffinity.PreferredDuringSchedulingIgnoredDuringExecution[0].weight | int | `100` |  |
 | nodePools.kafka.template.pod.affinity.podAntiAffinity.requiredDuringSchedulingIgnoredDuringExecution[0].labelSelector.matchExpressions[0].key | string | `"strimzi.io/pool-name"` |  |
 | nodePools.kafka.template.pod.affinity.podAntiAffinity.requiredDuringSchedulingIgnoredDuringExecution[0].labelSelector.matchExpressions[0].operator | string | `"In"` |  |
 | nodePools.kafka.template.pod.affinity.podAntiAffinity.requiredDuringSchedulingIgnoredDuringExecution[0].labelSelector.matchExpressions[0].values[0] | string | `"controller"` |  |
