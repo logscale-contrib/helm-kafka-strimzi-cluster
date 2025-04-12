@@ -1,8 +1,8 @@
+# Source: kafka-strimzi-cluster/templates/kafka-metrics.yaml
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  name: {{ include "kafka-strimzi-cluster.fullname" . }}-metrics-config
+  name: release-name-kafka-strimzi-cluster-metrics-config
 data:
   metrics-config: |-
     #Metrics Config may be empty if so defaults are used
-{{ .Values.kafka.metricsConfig.config | indent 4 }}
